@@ -1,32 +1,13 @@
 <!DOCTYPE html>
 
 <!--
------
 
 RpgMap / Docs v1.2.1
 
 (c) 2017-2019 John Erps
 
------
+This software is licensed under the MIT license (see LICENSE)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
------
 -->
 
 <html lang="en">
@@ -41,9 +22,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   <meta name="keywords" content="john erps ibm i iseries system i as/400 rpg programming rpgmap map dict dictionary api docs"/>
   <link rel="shortcut icon" href="/images/favicon.ico"/>
   <link rel="stylesheet" href="css/normalize.min.css"/>
-  <link rel="stylesheet" href="css/main.css?v=2"/>
-  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Ubuntu+Mono" rel="stylesheet"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Mono:400,700|Ubuntu+Mono:400,700&display=swap"/>
+  <script src="js/jquery@3.2.1.js"></script>
 </head>
 <body>
   <div id="pname">
@@ -60,7 +41,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       <div class="navlink2"><a id="_example_1" href="#example_1">Example 1</a></div>
       <div class="navlink2"><a id="_example_2" href="#example_2">Example 2</a></div>
       <div class="navlink2"><a id="_example_3" href="#example_3">Example 3</a></div>
-      <div class="navlink2"><br></div>
+      <br>
       <div class="navlink1"><a id="_usage" href="#usage">Usage</a></div>
       <div class="navlink2"><a id="_mapval" href="#mapval">Maps and Values</a></div>
       <div class="navlink2"><a id="_amemmgt" href="#amemmgt">Automatic Memory Management</a></div>
@@ -72,360 +53,396 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       <div class="navlink2"><a id="_longprnms" href="#longprnms">Short And Long Procedure Names</a></div>
       <div class="navlink2"><a id="_restrict" href="#restrict">Restrictions</a></div>
       <div class="navlink2"><a id="_escmsgs" href="#escmsgs">Escape Msgs</a></div>
-      <div class="navlink2"><br></div>
+      <br>
       <div class="navlink1"><a id="_installation" href="#installation">Installation</a></div>
-      <div class="navlink2"><br></div>
+      <br>
       <div class="navlink1"><a id="_api" href="#api">API</a></div>
-      <div class="navlink2"><br></div>
-      <div class="navlink2"><a id="_rm_m" href="#rm_m"><pre class="navprocnm">rm_m     </pre><span class="navprocd">Create a new map, automatically disposed</span></a></div>
-      <div class="navlink2"><a id="_rm_mm" href="#rm_mm"><pre class="navprocnm">rm_mm    </pre><span class="navprocd">Create a new map, manually disposed</span></a></div>
-      <div class="navlink2"><a id="_rm_v" href="#rm_v"><pre class="navprocnm">rm_v     </pre><span class="navprocd">Create a new vector, automatically disposed</span></a></div>
-      <div class="navlink2"><a id="_rm_ism" href="#rm_ism"><pre class="navprocnm">rm_ism   </pre><span class="navprocd">Is map?</span></a></div>
-      <div class="navlink2"><a id="_rm_ismm" href="#rm_ismm"><pre class="navprocnm">rm_ismm  </pre><span class="navprocd">Is manually disposed map?</span></a></div>
-      <div class="navlink2"><a id="_rm_isv" href="#rm_isv"><pre class="navprocnm">rm_isv   </pre><span class="navprocd">Is vector?</span></a></div>
-      <div class="navlink2"><a id="_rm_inm" href="#rm_inm"><pre class="navprocnm">rm_inm   </pre><span class="navprocd">In map?</span></a></div>
-      <div class="navlink2"><a id="_rm_mmm" href="#rm_mmm"><pre class="navprocnm">rm_mmm   </pre><span class="navprocd">Make map manually disposed</span></a></div>
-      <div class="navlink2"><a id="_rm_mmi" href="#rm_mmi"><pre class="navprocnm">rm_mmi   </pre><span class="navprocd">Make map immutable</span></a></div>
-      <div class="navlink2"><a id="_rm_dis" href="#rm_dis"><pre class="navprocnm">rm_dis   </pre><span class="navprocd">Dispose maps, cursors and values</span></a></div>
-      <div class="navlink2"><a id="_rm_ins" href="#rm_ins"><pre class="navprocnm">rm_ins   </pre><span class="navprocd">Insert key/item pairs</span></a></div>
-      <div class="navlink2"><a id="_rm_ins1" href="#rm_ins1"><pre class="navprocnm">rm_ins1  </pre><span class="navprocd">Insert 1 key/item pair</span></a></div>
-      <div class="navlink2"><a id="_rm_insm" href="#rm_insm"><pre class="navprocnm">rm_insm  </pre><span class="navprocd">Insert key/item pairs, from map</span></a></div>
-      <div class="navlink2"><a id="_rm_insc" href="#rm_insc"><pre class="navprocnm">rm_insc  </pre><span class="navprocd">Insert key/item pairs, conditionally</span></a></div>
-      <div class="navlink2"><a id="_rm_insc1" href="#rm_insc1"><pre class="navprocnm">rm_insc1 </pre><span class="navprocd">Insert 1 key/item pair, conditionally</span></a></div>
-      <div class="navlink2"><a id="_rm_inscm" href="#rm_inscm"><pre class="navprocnm">rm_inscm </pre><span class="navprocd">Insert key/item pairs, conditionally, from map</span></a></div>
-      <div class="navlink2"><a id="_rm_insx" href="#rm_insx"><pre class="navprocnm">rm_insx  </pre><span class="navprocd">Insert key/item pairs, exclusive</span></a></div>
-      <div class="navlink2"><a id="_rm_insx1" href="#rm_insx1"><pre class="navprocnm">rm_insx1 </pre><span class="navprocd">Insert 1 key/item pair, exclusive</span></a></div>
-      <div class="navlink2"><a id="_rm_insxm" href="#rm_insxm"><pre class="navprocnm">rm_insxm </pre><span class="navprocd">Insert key/item pairs, exclusive, from map</span></a></div>
-      <div class="navlink2"><a id="_rm_rmv" href="#rm_rmv"><pre class="navprocnm">rm_rmv   </pre><span class="navprocd">Remove key/item pair</span></a></div>
-      <div class="navlink2"><a id="_rm_rmva" href="#rm_rmva"><pre class="navprocnm">rm_rmva  </pre><span class="navprocd">Remove all key/item pairs</span></a></div>
-      <div class="navlink2"><a id="_rm_cmp" href="#rm_cmp"><pre class="navprocnm">rm_cmp   </pre><span class="navprocd">Compare two objects</span></a></div>
-      <div class="navlink2"><a id="_rm_ceq" href="#rm_ceq"><pre class="navprocnm">rm_ceq   </pre><span class="navprocd">obj1 = obj2 ?</span></a></div>
-      <div class="navlink2"><a id="_rm_clt" href="#rm_clt"><pre class="navprocnm">rm_clt   </pre><span class="navprocd">obj1 &lt; obj2 ?</span></a></div>
-      <div class="navlink2"><a id="_rm_cle" href="#rm_cle"><pre class="navprocnm">rm_cle   </pre><span class="navprocd">obj1 &lt;= obj2 ?</span></a></div>
-      <div class="navlink2"><a id="_rm_cgt" href="#rm_cgt"><pre class="navprocnm">rm_cgt   </pre><span class="navprocd">obj1 &gt; obj2 ?</span></a></div>
-      <div class="navlink2"><a id="_rm_cge" href="#rm_cge"><pre class="navprocnm">rm_cge   </pre><span class="navprocd">obj1 &gt;= obj2 ?</span></a></div>
-      <div class="navlink2"><a id="_rm_" href="#rm_"><pre class="navprocnm">rm_      </pre><span class="navprocd">Set special property</span></a></div>
-      <div class="navlink2"><a id="_rm_get" href="#rm_get"><pre class="navprocnm">rm_get   </pre><span class="navprocd">Retrieve item with a key</span></a></div>
-      <div class="navlink2"><a id="_rm__" href="#rm__"><pre class="navprocnm">rm__     </pre><span class="navprocd">Retrieve item with one or more keys</span></a></div>
-      <div class="navlink2"><a id="_rm__i" href="#rm__i"><pre class="navprocnm">rm__i    </pre><span class="navprocd">Retrieve item with one or more integer keys</span></a></div>
-      <div class="navlink2"><a id="_rm__p" href="#rm__p"><pre class="navprocnm">rm__p    </pre><span class="navprocd">Retrieve item with one or more p. decimal keys</span></a></div>
-      <div class="navlink2"><a id="_rm__d" href="#rm__d"><pre class="navprocnm">rm__d    </pre><span class="navprocd">Retrieve item with one or more date keys</span></a></div>
-      <div class="navlink2"><a id="_rm__t" href="#rm__t"><pre class="navprocnm">rm__t    </pre><span class="navprocd">Retrieve item with one or more time keys</span></a></div>
-      <div class="navlink2"><a id="_rm__z" href="#rm__z"><pre class="navprocnm">rm__z    </pre><span class="navprocd">Retrieve item with one or more timestamp keys</span></a></div>
-      <div class="navlink2"><a id="_rm__n" href="#rm__n"><pre class="navprocnm">rm__n    </pre><span class="navprocd">Retrieve item with one or more indicator keys</span></a></div>
-      <div class="navlink2"><a id="_rm__x" href="#rm__x"><pre class="navprocnm">rm__x    </pre><span class="navprocd">Retrieve item with one or more pointer keys</span></a></div>
-      <div class="navlink2"><a id="_rm__xp" href="#rm__xp"><pre class="navprocnm">rm__xp   </pre><span class="navprocd">Retrieve item with one or more proc. pointer keys</span></a></div>
-      <div class="navlink2"><a id="_rm__a" href="#rm__a"><pre class="navprocnm">rm__a    </pre><span class="navprocd">Retrieve item with one or more char. data keys</span></a></div>
-      <div class="navlink2"><a id="_rm__aa" href="#rm__aa"><pre class="navprocnm">rm__aa   </pre><span class="navprocd">Rtv item with one or more c. data (altseq) keys</span></a></div>
-      <div class="navlink2"><a id="_rm__s" href="#rm__s"><pre class="navprocnm">rm__s    </pre><span class="navprocd">Retrieve item with one or more string keys</span></a></div>
-      <div class="navlink2"><a id="_rm__sa" href="#rm__sa"><pre class="navprocnm">rm__sa   </pre><span class="navprocd">Retrieve item with one or more string (altseq) keys</span></a></div>
-      <div class="navlink2"><a id="_rm_hky" href="#rm_hky"><pre class="navprocnm">rm_hky   </pre><span class="navprocd">Has key?</span></a></div>
-      <div class="navlink2"><a id="_rm_hks" href="#rm_hks"><pre class="navprocnm">rm_hks   </pre><span class="navprocd">Has keys?</span></a></div>
-      <div class="navlink2"><a id="_rm_num" href="#rm_num"><pre class="navprocnm">rm_num   </pre><span class="navprocd">Number of key/item pairs</span></a></div>
-      <div class="navlink2"><a id="_rm_hit" href="#rm_hit"><pre class="navprocnm">rm_hit   </pre><span class="navprocd">Has item?</span></a></div>
-      <div class="navlink2"><a id="_rm_nit" href="#rm_nit"><pre class="navprocnm">rm_nit   </pre><span class="navprocd">Number of items</span></a></div>
-      <div class="navlink2"><a id="_rm_gik" href="#rm_gik"><pre class="navprocnm">rm_gik   </pre><span class="navprocd">Get item key</span></a></div>
-      <div class="navlink2"><a id="_rm_cpy" href="#rm_cpy"><pre class="navprocnm">rm_cpy   </pre><span class="navprocd">Copy map or value</span></a></div>
-      <div class="navlink2"><a id="_rm_cpyd" href="#rm_cpyd"><pre class="navprocnm">rm_cpyd  </pre><span class="navprocd">Deep copy map or value</span></a></div>
-      <div class="navlink2"><a id="_rm_cur" href="#rm_cur"><pre class="navprocnm">rm_cur   </pre><span class="navprocd">Create a new cursor</span></a></div>
-      <div class="navlink2"><a id="_rm_sll" href="#rm_sll"><pre class="navprocnm">rm_sll   </pre><span class="navprocd">Set lower limit</span></a></div>
-      <div class="navlink2"><a id="_rm_sgt" href="#rm_sgt"><pre class="navprocnm">rm_sgt   </pre><span class="navprocd">Set greater than</span></a></div>
-      <div class="navlink2"><a id="_rm_rdn" href="#rm_rdn"><pre class="navprocnm">rm_rdn   </pre><span class="navprocd">Read next key/item pair</span></a></div>
-      <div class="navlink2"><a id="_rm_rdp" href="#rm_rdp"><pre class="navprocnm">rm_rdp   </pre><span class="navprocd">Read previous key/item pair</span></a></div>
-      <div class="navlink2"><a id="_rm_key" href="#rm_key"><pre class="navprocnm">rm_key   </pre><span class="navprocd">Return current key</span></a></div>
-      <div class="navlink2"><a id="_rm_itm" href="#rm_itm"><pre class="navprocnm">rm_itm   </pre><span class="navprocd">Return current item</span></a></div>
-      <div class="navlink2"><a id="_rm_slln" href="#rm_slln"><pre class="navprocnm">rm_slln  </pre><span class="navprocd">Set lower limit, read next</span></a></div>
-      <div class="navlink2"><a id="_rm_sgtp" href="#rm_sgtp"><pre class="navprocnm">rm_sgtp  </pre><span class="navprocd">Set greater than, read previous</span></a></div>
-      <div class="navlink2"><a id="_rm_hsn" href="#rm_hsn"><pre class="navprocnm">rm_hsn   </pre><span class="navprocd">Has next?</span></a></div>
-      <div class="navlink2"><a id="_rm_hsp" href="#rm_hsp"><pre class="navprocnm">rm_hsp   </pre><span class="navprocd">Has previous?</span></a></div>
-      <div class="navlink2"><a id="_rm_fed" href="#rm_fed"><pre class="navprocnm">rm_fed   </pre><span class="navprocd">For each do</span></a></div>
-      <div class="navlink2"><a id="_rm_fedr" href="#rm_fedr"><pre class="navprocnm">rm_fedr  </pre><span class="navprocd">For each do, reversed</span></a></div>
-      <div class="navlink2"><a id="_rm_scf" href="#rm_scf"><pre class="navprocnm">rm_scf   </pre><span class="navprocd">Set compare function</span></a></div>
-      <div class="navlink2"><a id="_rm_gcf" href="#rm_gcf"><pre class="navprocnm">rm_gcf   </pre><span class="navprocd">Get compare function</span></a></div>
-      <div class="navlink2"><a id="_rm_sav" href="#rm_sav"><pre class="navprocnm">rm_sav   </pre><span class="navprocd">Set attribute values</span></a></div>
-      <div class="navlink2"><a id="_rm_gav" href="#rm_gav"><pre class="navprocnm">rm_gav   </pre><span class="navprocd">Get attribute value</span></a></div>
-      <div class="navlink2"><a id="_rm_usrd" href="#rm_usrd"><pre class="navprocnm">rm_usrd  </pre><span class="navprocd">Return user data</span></a></div>
-      <div class="navlink2"><br></div>
-      <div class="navlink2"><a id="_rm_i" href="#rm_i"><pre class="navprocnm">rm_i     </pre><span class="navprocd">Create a new integer value, 10 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_i1" href="#rm_i1"><pre class="navprocnm">rm_i1    </pre><span class="navprocd">Create a new integer value, 10 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_i2" href="#rm_i2"><pre class="navprocnm">rm_i2    </pre><span class="navprocd">Create a new integer value, 20 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_isi" href="#rm_isi"><pre class="navprocnm">rm_isi   </pre><span class="navprocd">Is any integer?</span></a></div>
-      <div class="navlink2"><a id="_rm_isi1" href="#rm_isi1"><pre class="navprocnm">rm_isi1  </pre><span class="navprocd">Is integer with 10 digits?</span></a></div>
-      <div class="navlink2"><a id="_rm_isi2" href="#rm_isi2"><pre class="navprocnm">rm_isi2  </pre><span class="navprocd">Is integer with 20 digits?</span></a></div>
-      <div class="navlink2"><a id="_rm_i_" href="#rm_i_"><pre class="navprocnm">rm_i_    </pre><span class="navprocd">Cvt a number to an RPG integer value, 10 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_i__" href="#rm_i__"><pre class="navprocnm">rm_i__   </pre><span class="navprocd">Same, and dispose the number</span></a></div>
-      <div class="navlink2"><a id="_rm_i1_" href="#rm_i1_"><pre class="navprocnm">rm_i1_   </pre><span class="navprocd">Cvt a number to an RPG integer value, 10 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_i1__" href="#rm_i1__"><pre class="navprocnm">rm_i1__  </pre><span class="navprocd">Same, and dispose the number</span></a></div>
-      <div class="navlink2"><a id="_rm_i2_" href="#rm_i2_"><pre class="navprocnm">rm_i2_   </pre><span class="navprocd">Cvt a number to an RPG integer value, 20 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_i2__" href="#rm_i2__"><pre class="navprocnm">rm_i2__  </pre><span class="navprocd">Same, and dispose the number</span></a></div>
-      <div class="navlink2"><a id="_rm_p" href="#rm_p"><pre class="navprocnm">rm_p     </pre><span class="navprocd">Create a new packed decimal value, 10.4 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_p1" href="#rm_p1"><pre class="navprocnm">rm_p1    </pre><span class="navprocd">Create a new packed decimal value, 10.4 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_p2" href="#rm_p2"><pre class="navprocnm">rm_p2    </pre><span class="navprocd">Create a new packed decimal value, 20.8 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_p3" href="#rm_p3"><pre class="navprocnm">rm_p3    </pre><span class="navprocd">Create a new packed decimal value, 30.16 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_isp" href="#rm_isp"><pre class="navprocnm">rm_isp   </pre><span class="navprocd">Is any packed decimal?</span></a></div>
-      <div class="navlink2"><a id="_rm_isp1" href="#rm_isp1"><pre class="navprocnm">rm_isp1  </pre><span class="navprocd">Is packed decimal with 10.4 digits?</span></a></div>
-      <div class="navlink2"><a id="_rm_isp2" href="#rm_isp2"><pre class="navprocnm">rm_isp2  </pre><span class="navprocd">Is packed decimal with 20.8 digits?</span></a></div>
-      <div class="navlink2"><a id="_rm_isp3" href="#rm_isp3"><pre class="navprocnm">rm_isp3  </pre><span class="navprocd">Is packed decimal with 30.16 digits?</span></a></div>
-      <div class="navlink2"><a id="_rm_p_" href="#rm_p_"><pre class="navprocnm">rm_p_    </pre><span class="navprocd">Cvt a number to an RPG p. dec. value, 10.4 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_p__" href="#rm_p__"><pre class="navprocnm">rm_p__   </pre><span class="navprocd">Same, and dispose the number</span></a></div>
-      <div class="navlink2"><a id="_rm_p1_" href="#rm_p1_"><pre class="navprocnm">rm_p1_   </pre><span class="navprocd">Cvt a number to an RPG p. dec. value, 10.4 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_p1__" href="#rm_p1__"><pre class="navprocnm">rm_p1__  </pre><span class="navprocd">Same, and dispose the number</span></a></div>
-      <div class="navlink2"><a id="_rm_p2_" href="#rm_p2_"><pre class="navprocnm">rm_p2_   </pre><span class="navprocd">Cvt a number to an RPG p. dec. value, 20.8 digits</span></a></div>
-      <div class="navlink2"><a id="_rm_p2__" href="#rm_p2__"><pre class="navprocnm">rm_p2__  </pre><span class="navprocd">Same, and dispose the number</span></a></div>
-      <div class="navlink2"><a id="_rm_p3_" href="#rm_p3_"><pre class="navprocnm">rm_p3_   </pre><span class="navprocd">Cvt a number to an RPG p. dec. value, 30.16 dig</span></a></div>
-      <div class="navlink2"><a id="_rm_p3__" href="#rm_p3__"><pre class="navprocnm">rm_p3__  </pre><span class="navprocd">Same, and dispose the number</span></a></div>
-      <div class="navlink2"><a id="_rm_d" href="#rm_d"><pre class="navprocnm">rm_d     </pre><span class="navprocd">Create a new date value</span></a></div>
-      <div class="navlink2"><a id="_rm_t" href="#rm_t"><pre class="navprocnm">rm_t     </pre><span class="navprocd">Create a new time value</span></a></div>
-      <div class="navlink2"><a id="_rm_z" href="#rm_z"><pre class="navprocnm">rm_z     </pre><span class="navprocd">Create a new timestamp value</span></a></div>
-      <div class="navlink2"><a id="_rm_isd" href="#rm_isd"><pre class="navprocnm">rm_isd   </pre><span class="navprocd">Is date?</span></a></div>
-      <div class="navlink2"><a id="_rm_ist" href="#rm_isd"><pre class="navprocnm">rm_ist   </pre><span class="navprocd">Is time?</span></a></div>
-      <div class="navlink2"><a id="_rm_isz" href="#rm_isd"><pre class="navprocnm">rm_isz   </pre><span class="navprocd">Is timestamp?</span></a></div>
-      <div class="navlink2"><a id="_rm_d_" href="#rm_d_"><pre class="navprocnm">rm_d_    </pre><span class="navprocd">Convert a date/timestamp to an RPG date value</span></a></div>
-      <div class="navlink2"><a id="_rm_d__" href="#rm_d__"><pre class="navprocnm">rm_d__   </pre><span class="navprocd">Same, and dispose the date/timestamp</span></a></div>
-      <div class="navlink2"><a id="_rm_t_" href="#rm_t_"><pre class="navprocnm">rm_t_    </pre><span class="navprocd">Convert a time/timestamp to an RPG time value</span></a></div>
-      <div class="navlink2"><a id="_rm_t__" href="#rm_t__"><pre class="navprocnm">rm_t__   </pre><span class="navprocd">Same, and dispose the time/timestamp</span></a></div>
-      <div class="navlink2"><a id="_rm_z_" href="#rm_z_"><pre class="navprocnm">rm_z_    </pre><span class="navprocd">Convert a date/timestamp to an RPG timest. value</span></a></div>
-      <div class="navlink2"><a id="_rm_z__" href="#rm_z__"><pre class="navprocnm">rm_z__   </pre><span class="navprocd">Same, and dispose the date/timestamp</span></a></div>
-      <div class="navlink2"><a id="_rm_n" href="#rm_n"><pre class="navprocnm">rm_n     </pre><span class="navprocd">Create a new indicator value</span></a></div>
-      <div class="navlink2"><a id="_rm_isn" href="#rm_isn"><pre class="navprocnm">rm_isn   </pre><span class="navprocd">Is indicator?</span></a></div>
-      <div class="navlink2"><a id="_rm_n_" href="#rm_n_"><pre class="navprocnm">rm_n_    </pre><span class="navprocd">Convert an indicator to an RPG indicator value</span></a></div>
-      <div class="navlink2"><a id="_rm_n__" href="#rm_n__"><pre class="navprocnm">rm_n__   </pre><span class="navprocd">Same, and dispose the indicator</span></a></div>
-      <div class="navlink2"><a id="_rm_x" href="#rm_x"><pre class="navprocnm">rm_x     </pre><span class="navprocd">Create a new pointer value</span></a></div>
-      <div class="navlink2"><a id="_rm_isx" href="#rm_isx"><pre class="navprocnm">rm_isx   </pre><span class="navprocd">Is pointer?</span></a></div>
-      <div class="navlink2"><a id="_rm_x_" href="#rm_x_"><pre class="navprocnm">rm_x_    </pre><span class="navprocd">Convert a pointer to an RPG pointer value</span></a></div>
-      <div class="navlink2"><a id="_rm_x__" href="#rm_x__"><pre class="navprocnm">rm_x__   </pre><span class="navprocd">Same, and dispose the pointer</span></a></div>
-      <div class="navlink2"><a id="_rm_xp" href="#rm_xp"><pre class="navprocnm">rm_xp    </pre><span class="navprocd">Create a new procedure pointer value</span></a></div>
-      <div class="navlink2"><a id="_rm_isxp" href="#rm_isxp"><pre class="navprocnm">rm_isxp  </pre><span class="navprocd">Is procedure pointer?</span></a></div>
-      <div class="navlink2"><a id="_rm_xp_" href="#rm_xp_"><pre class="navprocnm">rm_xp_   </pre><span class="navprocd">Convert a proc. pointer to an RPG proc. ptr value</span></a></div>
-      <div class="navlink2"><a id="_rm_xp__" href="#rm_xp__"><pre class="navprocnm">rm_xp__  </pre><span class="navprocd">Same, and dispose the proc. pointer</span></a></div>
-      <div class="navlink2"><a id="_rm_a" href="#rm_a"><pre class="navprocnm">rm_a     </pre><span class="navprocd">Create a new character data value</span></a></div>
-      <div class="navlink2"><a id="_rm_ap" href="#rm_ap"><pre class="navprocnm">rm_ap    </pre><span class="navprocd">Create a new character data value, pointer to data</span></a></div>
-      <div class="navlink2"><a id="_rm_aa" href="#rm_aa"><pre class="navprocnm">rm_aa    </pre><span class="navprocd">Create a new character data value, alt. sort seq.</span></a></div>
-      <div class="navlink2"><a id="_rm_aap" href="#rm_aap"><pre class="navprocnm">rm_aap   </pre><span class="navprocd">Create a new char. data value, alt.s.seq., ptr to data</span></a></div>
-      <div class="navlink2"><a id="_rm_isa" href="#rm_isa"><pre class="navprocnm">rm_isa   </pre><span class="navprocd">Is character data?</span></a></div>
-      <div class="navlink2"><a id="_rm_isaa" href="#rm_isaa"><pre class="navprocnm">rm_isaa  </pre><span class="navprocd">Is character data with alt. sort seq.?</span></a></div>
-      <div class="navlink2"><a id="_rm_a_" href="#rm_a_"><pre class="navprocnm">rm_a_    </pre><span class="navprocd">Convert character data to RPG character data</span></a></div>
-      <div class="navlink2"><a id="_rm_a__" href="#rm_a__"><pre class="navprocnm">rm_a__   </pre><span class="navprocd">Same, and dispose the character data</span></a></div>
-      <div class="navlink2"><a id="_rm_a1_" href="#rm_a1_"><pre class="navprocnm">rm_a1_   </pre><span class="navprocd">Convert char. data to RPG char. data (100)</span></a></div>
-      <div class="navlink2"><a id="_rm_a1__" href="#rm_a1__"><pre class="navprocnm">rm_a1__  </pre><span class="navprocd">Same, and dispose the character data</span></a></div>
-      <div class="navlink2"><a id="_rm_a2_" href="#rm_a2_"><pre class="navprocnm">rm_a2_   </pre><span class="navprocd">Convert char. data to RPG char. data (1000)</span></a></div>
-      <div class="navlink2"><a id="_rm_a2__" href="#rm_a2__"><pre class="navprocnm">rm_a2__  </pre><span class="navprocd">Same, and dispose the character data</span></a></div>
-      <div class="navlink2"><a id="_rm_a3_" href="#rm_a3_"><pre class="navprocnm">rm_a3_   </pre><span class="navprocd">Convert char. data to RPG char. data (10000)</span></a></div>
-      <div class="navlink2"><a id="_rm_a3__" href="#rm_a3__"><pre class="navprocnm">rm_a3__  </pre><span class="navprocd">Same, and dispose the character data</span></a></div>
-      <div class="navlink2"><a id="_rm_s" href="#rm_s"><pre class="navprocnm">rm_s     </pre><span class="navprocd">Create a new string value</span></a></div>
-      <div class="navlink2"><a id="_rm_sb" href="#rm_sb"><pre class="navprocnm">rm_sb    </pre><span class="navprocd">Create a new string value, from binary</span></a></div>
-      <div class="navlink2"><a id="_rm_sa" href="#rm_sa"><pre class="navprocnm">rm_sa    </pre><span class="navprocd">Create a new string value, alt. sort sequence</span></a></div>
-      <div class="navlink2"><a id="_rm_sab" href="#rm_sab"><pre class="navprocnm">rm_sab   </pre><span class="navprocd">Create a new string value, alt. sort seq., from binary</span></a></div>
-      <div class="navlink2"><a id="_rm_iss" href="#rm_iss"><pre class="navprocnm">rm_iss   </pre><span class="navprocd">Is string?</span></a></div>
-      <div class="navlink2"><a id="_rm_issa" href="#rm_issa"><pre class="navprocnm">rm_issa  </pre><span class="navprocd">Is string with alt. sort seq.?</span></a></div>
-      <div class="navlink2"><a id="_rm_s_" href="#rm_s_"><pre class="navprocnm">rm_s_    </pre><span class="navprocd">Convert string to RPG utf-8 character data</span></a></div>
-      <div class="navlink2"><a id="_rm_s__" href="#rm_s__"><pre class="navprocnm">rm_s__   </pre><span class="navprocd">Same, and dispose the string</span></a></div>
-      <div class="navlink2"><a id="_rm_s1_" href="#rm_s1_"><pre class="navprocnm">rm_s1_   </pre><span class="navprocd">Convert string to RPG utf-8 character data (100)</span></a></div>
-      <div class="navlink2"><a id="_rm_s1__" href="#rm_s1__"><pre class="navprocnm">rm_s1__  </pre><span class="navprocd">Same, and dispose the string</span></a></div>
-      <div class="navlink2"><a id="_rm_s2_" href="#rm_s2_"><pre class="navprocnm">rm_s2_   </pre><span class="navprocd">Convert string to RPG utf-8 character data (1000)</span></a></div>
-      <div class="navlink2"><a id="_rm_s2__" href="#rm_s2__"><pre class="navprocnm">rm_s2__  </pre><span class="navprocd">Same, and dispose the string</span></a></div>
-      <div class="navlink2"><a id="_rm_s3_" href="#rm_s3_"><pre class="navprocnm">rm_s3_   </pre><span class="navprocd">Convert string to RPG utf-8 character data (10000)</span></a></div>
-      <div class="navlink2"><a id="_rm_s3__" href="#rm_s3__"><pre class="navprocnm">rm_s3__  </pre><span class="navprocd">Same, and dispose the string</span></a></div>
-      <div class="navlink2"><br></div>
-      <div class="navlink3"><a id="_rm_add_event_handler" href="#rm_add_event_handler"><div class="navprocnm2">rm_add_event_handler</div></a><br>
-      <div class="navlink4">Add an event handler to a map</div></div>
-      <div class="navlink3"><a id="_rm_remove_event_handler" href="#rm_remove_event_handler"><div class="navprocnm2">rm_remove_event_handler</div></a><br>
-      <div class="navlink4">Remove an event handler from a map</div></div>
+      <br>
+      <span class="navproc1"><a id="_rm_m" href="#rm_m">rm_m</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new map, automatically disposed</span><br>
+      <span class="navproc1"><a id="_rm_mm" href="#rm_mm">rm_mm</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new map, manually disposed</span><br>
+      <span class="navproc1"><a id="_rm_v" href="#rm_v">rm_v</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new vector, automatically disposed</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_is_m" href="#rm_is_m">rm_is_m</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is map?</span><br>
+      <span class="navproc1"><a id="_rm_is_mm" href="#rm_is_mm">rm_is_mm</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is manually disposed map?</span><br>
+      <span class="navproc1"><a id="_rm_is_v" href="#rm_is_v">rm_is_v</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is vector?</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_in_map" href="#rm_in_map">rm_in_map</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;In map?</span><br>
+      <br>
+      <span class="navproc3"><a id="_rm_make_map_man_disp" href="#rm_make_map_man_disp">rm_make_map_man_disp</a></span><br><span class="navproc4">Make map manually disposed</span><br>
+      <span class="navproc3"><a id="_rm_make_map_immutable" href="#rm_make_map_immutable">rm_make_map_immutable</a></span><br><span class="navproc4">Make map immutable</span><br>
+      <br>
+      <span class="navproc3"><a id="_rm_dispose" href="#rm_dispose">rm_dispose</a></span><br><span class="navproc4">Dispose maps, cursors and values</span><br>
+      <br>
+      <span class="navproc3"><a id="_rm_insert" href="#rm_insert">rm_insert</a></span><br><span class="navproc4">Insert key/item pairs</span><br>
+      <span class="navproc3"><a id="_rm_insert_1" href="#rm_insert_1">rm_insert_1</a></span><br><span class="navproc4">Insert 1 key/item pair</span><br>
+      <span class="navproc3"><a id="_rm_insert_map" href="#rm_insert_map">rm_insert_map</a></span><br><span class="navproc4">Insert key/item pairs, from map</span><br>
+      <span class="navproc3"><a id="_rm_insert_c" href="#rm_insert_c">rm_insert_c</a></span><br><span class="navproc4">Insert key/item pairs, conditionally</span><br>
+      <span class="navproc3"><a id="_rm_insert_c_1" href="#rm_insert_c_1">rm_insert_c_1</a></span><br><span class="navproc4">Insert 1 key/item pair, conditionally</span><br>
+      <span class="navproc3"><a id="_rm_insert_c_map" href="#rm_insert_c_map">rm_insert_c_map</a></span><br><span class="navproc4">Insert key/item pairs, conditionally, from map</span><br>
+      <span class="navproc3"><a id="_rm_insert_x" href="#rm_insert_x">rm_insert_x</a></span><br><span class="navproc4">Insert key/item pairs, exclusive</span><br>
+      <span class="navproc3"><a id="_rm_insert_x_1" href="#rm_insert_x_1">rm_insert_x_1</a></span><br><span class="navproc4">Insert 1 key/item pair, exclusive</span><br>
+      <span class="navproc3"><a id="_rm_insert_x_map" href="#rm_insert_x_map">rm_insert_x_map</a></span><br><span class="navproc4">Insert key/item pairs, exclusive, from map</span><br>
+      <br>
+      <span class="navproc3"><a id="_rm_remove" href="#rm_remove">rm_remove</a></span><br><span class="navproc4">Remove key/item pair</span><br>
+      <span class="navproc3"><a id="_rm_remove_all" href="#rm_remove_all">rm_remove_all</a></span><br><span class="navproc4">Remove all key/item pairs</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_compare" href="#rm_compare">rm_compare</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Compare two objects</span><br>
+      <span class="navproc1"><a id="_rm_compare_eq" href="#rm_compare_eq">rm_compare_eq</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;obj1 = obj2 ?</span><br>
+      <span class="navproc1"><a id="_rm_compare_lt" href="#rm_compare_lt">rm_compare_lt</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;obj1 &lt; obj2 ?</span><br>
+      <span class="navproc1"><a id="_rm_compare_le" href="#rm_compare_le">rm_compare_le</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;obj1 &lt;= obj2 ?</span><br>
+      <span class="navproc1"><a id="_rm_compare_gt" href="#rm_compare_gt">rm_compare_gt</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;obj1 &gt; obj2 ?</span><br>
+      <span class="navproc1"><a id="_rm_compare_ge" href="#rm_compare_ge">rm_compare_ge</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;obj1 &gt;= obj2 ?</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_" href="#rm_">rm_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Set special property</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_get" href="#rm_get">rm_get</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Retrieve item with a key</span><br>
+      <br>
+      <span class="navproc3"><a id="_rm__" href="#rm__">rm__</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more keys</span><br>
+      <span class="navproc3"><a id="_rm__i" href="#rm__i">rm__i</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more integer keys</span><br>
+      <span class="navproc3"><a id="_rm__p" href="#rm__p">rm__p</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more p. decimal keys</span><br>
+      <span class="navproc3"><a id="_rm__d" href="#rm__d">rm__d</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more date keys</span><br>
+      <span class="navproc3"><a id="_rm__t" href="#rm__t">rm__t</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more time keys</span><br>
+      <span class="navproc3"><a id="_rm__z" href="#rm__z">rm__z</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more timestamp keys</span><br>
+      <span class="navproc3"><a id="_rm__n" href="#rm__n">rm__n</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more indicator keys</span><br>
+      <span class="navproc3"><a id="_rm__x" href="#rm__x">rm__x</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more pointer keys</span><br>
+      <span class="navproc3"><a id="_rm__xp" href="#rm__xp">rm__xp</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more proc. pointer keys</span><br>
+      <span class="navproc3"><a id="_rm__a" href="#rm__a">rm__a</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more char. data keys</span><br>
+      <span class="navproc3"><a id="_rm__aa" href="#rm__aa">rm__aa</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more c. data (altseq) keys</span><br>
+      <span class="navproc3"><a id="_rm__s" href="#rm__s">rm__s</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more string keys</span><br>
+      <span class="navproc3"><a id="_rm__sa" href="#rm__sa">rm__sa</a></span><br><span class="navproc4">&nbsp;&#x22C5;&nbsp;Retrieve item with one or more string (altseq) keys</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_has_key" href="#rm_has_key">rm_has_key</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Has key?</span><br>
+      <span class="navproc1"><a id="_rm_has_keys" href="#rm_has_keys">rm_has_keys</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Has keys?</span><br>
+      <span class="navproc1"><a id="_rm_num" href="#rm_num">rm_num</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Number of key/item pairs</span><br>
+      <span class="navproc1"><a id="_rm_has_item" href="#rm_has_item">rm_has_item</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Has item?</span><br>
+      <span class="navproc1"><a id="_rm_num_items" href="#rm_num_items">rm_num_items</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Number of items</span><br>
+      <span class="navproc1"><a id="_rm_get_item_key" href="#rm_get_item_key">rm_get_item_key</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Get item key</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_copy" href="#rm_copy">rm_copy</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Copy map or value</span><br>
+      <span class="navproc1"><a id="_rm_copy_deep" href="#rm_copy_deep">rm_copy_deep</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Deep copy map or value</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_cursor" href="#rm_cursor">rm_cursor</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create a new cursor</span><br>
+      <span class="navproc1"><a id="_rm_setll" href="#rm_setll">rm_setll</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Set lower limit</span><br>
+      <span class="navproc1"><a id="_rm_setgt" href="#rm_setgt">rm_setgt</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Set greater than</span><br>
+      <span class="navproc1"><a id="_rm_read_next" href="#rm_read_next">rm_read_next</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Read next key/item pair</span><br>
+      <span class="navproc1"><a id="_rm_read_prev" href="#rm_read_prev">rm_read_prev</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Read previous key/item pair</span><br>
+      <span class="navproc1"><a id="_rm_key" href="#rm_key">rm_key</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Return current key</span><br>
+      <span class="navproc1"><a id="_rm_item" href="#rm_item">rm_item</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Return current item</span><br>
+      <span class="navproc1"><a id="_rm_setll_read_next" href="#rm_setll_read_next">rm_setll_read_next</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Set lower limit, read next</span><br>
+      <span class="navproc1"><a id="_rm_setgt_read_prev" href="#rm_setgt_read_prev">rm_setgt_read_prev</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Set greater than, read previous</span><br>
+      <span class="navproc1"><a id="_rm_has_next" href="#rm_has_next">rm_has_next</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Has next?</span><br>
+      <span class="navproc1"><a id="_rm_has_prev" href="#rm_has_prev">rm_has_prev</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Has previous?</span><br>
+      <br>
+      <span class="navproc3"><a id="_rm_for_each_do" href="#rm_for_each_do">rm_for_each_do</a></span><br><span class="navproc4">For each do</span><br>
+      <span class="navproc3"><a id="_rm_for_each_do_rev" href="#rm_for_each_do_rev">rm_for_each_do_rev</a></span><br><span class="navproc4">For each do, reversed</span><br>
+      <span class="navproc3"><a id="_rm_set_comp_fun" href="#rm_set_comp_fun">rm_set_comp_fun</a></span><br><span class="navproc4">Set compare function</span><br>
+      <span class="navproc3"><a id="_rm_get_comp_fun" href="#rm_get_comp_fun">rm_get_comp_fun</a></span><br><span class="navproc4">Get compare function</span><br>
+      <span class="navproc3"><a id="_rm_set_attr_val" href="#rm_set_attr_val">rm_set_attr_val</a></span><br><span class="navproc4">Set attribute values</span><br>
+      <span class="navproc3"><a id="_rm_get_attr_val" href="#rm_get_attr_val">rm_get_attr_val</a></span><br><span class="navproc4">Get attribute value</span><br>
+      <span class="navproc3"><a id="_rm_user_data" href="#rm_user_data">rm_user_data</a></span><br><span class="navproc4">Return user data</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_i" href="#rm_i">rm_i</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new integer value, 10 digits</span><br>
+      <span class="navproc1"><a id="_rm_i1" href="#rm_i1">rm_i1</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new integer value, 10 digits</span><br>
+      <span class="navproc1"><a id="_rm_i2" href="#rm_i2">rm_i2</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new integer value, 20 digits</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_is_i" href="#rm_is_i">rm_is_i</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is any integer?</span><br>
+      <span class="navproc1"><a id="_rm_is_i1" href="#rm_is_i1">rm_is_i1</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is integer with 10 digits?</span><br>
+      <span class="navproc1"><a id="_rm_is_i2" href="#rm_is_i2">rm_is_i2</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is integer with 20 digits?</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_i_" href="#rm_i_">rm_i_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Cvt number to RPG integer value, 10 digits</span><br>
+      <span class="navproc1"><a id="_rm_i__" href="#rm_i__">rm_i__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the number</span><br>
+      <span class="navproc1"><a id="_rm_i1_" href="#rm_i1_">rm_i1_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Cvt number to RPG integer value, 10 digits</span><br>
+      <span class="navproc1"><a id="_rm_i1__" href="#rm_i1__">rm_i1__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the number</span><br>
+      <span class="navproc1"><a id="_rm_i2_" href="#rm_i2_">rm_i2_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Cvt number to RPG integer value, 20 digits</span><br>
+      <span class="navproc1"><a id="_rm_i2__" href="#rm_i2__">rm_i2__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the number</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_p" href="#rm_p">rm_p</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new packed decimal value, 10.4 digits</span><br>
+      <span class="navproc1"><a id="_rm_p1" href="#rm_p1">rm_p1</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new packed decimal value, 10.4 digits</span><br>
+      <span class="navproc1"><a id="_rm_p2" href="#rm_p2">rm_p2</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new packed decimal value, 20.8 digits</span><br>
+      <span class="navproc1"><a id="_rm_p3" href="#rm_p3">rm_p3</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new packed decimal value, 30.16 digits</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_is_p" href="#rm_is_p">rm_is_p</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is any packed decimal?</span><br>
+      <span class="navproc1"><a id="_rm_is_p1" href="#rm_is_p1">rm_is_p1</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is packed decimal with 10.4 digits?</span><br>
+      <span class="navproc1"><a id="_rm_is_p2" href="#rm_is_p2">rm_is_p2</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is packed decimal with 20.8 digits?</span><br>
+      <span class="navproc1"><a id="_rm_is_p3" href="#rm_is_p3">rm_is_p3</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is packed decimal with 30.16 digits?</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_p_" href="#rm_p_">rm_p_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Cvt number to RPG p. dec. value, 10.4 digits</span><br>
+      <span class="navproc1"><a id="_rm_p__" href="#rm_p__">rm_p__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the number</span><br>
+      <span class="navproc1"><a id="_rm_p1_" href="#rm_p1_">rm_p1_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Cvt number to RPG p. dec. value, 10.4 digits</span><br>
+      <span class="navproc1"><a id="_rm_p1__" href="#rm_p1__">rm_p1__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the number</span><br>
+      <span class="navproc1"><a id="_rm_p2_" href="#rm_p2_">rm_p2_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Cvt number to RPG p. dec. value, 20.8 digits</span><br>
+      <span class="navproc1"><a id="_rm_p2__" href="#rm_p2__">rm_p2__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the number</span><br>
+      <span class="navproc1"><a id="_rm_p3_" href="#rm_p3_">rm_p3_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Cvt number to RPG p. dec. value, 30.16 digits</span><br>
+      <span class="navproc1"><a id="_rm_p3__" href="#rm_p3__">rm_p3__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the number</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_d" href="#rm_d">rm_d</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new date value</span><br>
+      <span class="navproc1"><a id="_rm_t" href="#rm_t">rm_t</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new time value</span><br>
+      <span class="navproc1"><a id="_rm_z" href="#rm_z">rm_z</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new timestamp value</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_is_d" href="#rm_is_d">rm_is_d</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is date?</span><br>
+      <span class="navproc1"><a id="_rm_is_t" href="#rm_is_t">rm_is_t</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is time?</span><br>
+      <span class="navproc1"><a id="_rm_is_z" href="#rm_is_z">rm_is_z</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is timestamp?</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_d_" href="#rm_d_">rm_d_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert date/timestamp to RPG date value</span><br>
+      <span class="navproc1"><a id="_rm_d__" href="#rm_d__">rm_d__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the date/timestamp</span><br>
+      <span class="navproc1"><a id="_rm_t_" href="#rm_t_">rm_t_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert time/timestamp to RPG time value</span><br>
+      <span class="navproc1"><a id="_rm_t__" href="#rm_t__">rm_t__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the time/timestamp</span><br>
+      <span class="navproc1"><a id="_rm_z_" href="#rm_z_">rm_z_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert date/timestamp to RPG timest. value</span><br>
+      <span class="navproc1"><a id="_rm_z__" href="#rm_z__">rm_z__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the date/timestamp</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_n" href="#rm_n">rm_n</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new indicator value</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_is_n" href="#rm_is_n">rm_is_n</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is indicator?</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_n_" href="#rm_n_">rm_n_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert indicator to RPG indicator value</span><br>
+      <span class="navproc1"><a id="_rm_n__" href="#rm_n__">rm_n__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the indicator</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_x" href="#rm_x">rm_x</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new pointer value</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_is_x" href="#rm_is_x">rm_is_x</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is pointer?</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_x_" href="#rm_x_">rm_x_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert pointer to RPG pointer value</span><br>
+      <span class="navproc1"><a id="_rm_x__" href="#rm_x__">rm_x__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the pointer</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_xp" href="#rm_xp">rm_xp</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new procedure pointer value</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_is_xp" href="#rm_is_xp">rm_is_xp</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is procedure pointer?</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_xp_" href="#rm_xp_">rm_xp_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert proc. pointer to RPG proc. ptr value</span><br>
+      <span class="navproc1"><a id="_rm_xp__" href="#rm_xp__">rm_xp__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the proc. pointer</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_a" href="#rm_a">rm_a</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new character data value</span><br>
+      <span class="navproc1"><a id="_rm_ap" href="#rm_ap">rm_ap</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new character data value, pointer to data</span><br>
+      <span class="navproc1"><a id="_rm_aa" href="#rm_aa">rm_aa</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new character data value, alt. sort seq.</span><br>
+      <span class="navproc1"><a id="_rm_aap" href="#rm_aap">rm_aap</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new char. data value, alt.s.seq., ptr to data</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_is_a" href="#rm_is_a">rm_is_a</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is character data?</span><br>
+      <span class="navproc1"><a id="_rm_is_aa" href="#rm_is_aa">rm_is_aa</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is character data with alt. sort seq.?</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_a_" href="#rm_a_">rm_a_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert character data to RPG character data</span><br>
+      <span class="navproc1"><a id="_rm_a__" href="#rm_a__">rm_a__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the character data</span><br>
+      <span class="navproc1"><a id="_rm_a1_" href="#rm_a1_">rm_a1_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert char. data to RPG char. data (100)</span><br>
+      <span class="navproc1"><a id="_rm_a1__" href="#rm_a1__">rm_a1__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the character data</span><br>
+      <span class="navproc1"><a id="_rm_a2_" href="#rm_a2_">rm_a2_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert char. data to RPG char. data (1000)</span><br>
+      <span class="navproc1"><a id="_rm_a2__" href="#rm_a2__">rm_a2__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the character data</span><br>
+      <span class="navproc1"><a id="_rm_a3_" href="#rm_a3_">rm_a3_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert char. data to RPG char. data (10000)</span><br>
+      <span class="navproc1"><a id="_rm_a3__" href="#rm_a3__">rm_a3__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the character data</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_s" href="#rm_s">rm_s</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new string value</span><br>
+      <span class="navproc1"><a id="_rm_sb" href="#rm_sb">rm_sb</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new string value, from binary</span><br>
+      <span class="navproc1"><a id="_rm_sa" href="#rm_sa">rm_sa</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new string value, alt. sort sequence</span><br>
+      <span class="navproc1"><a id="_rm_sab" href="#rm_sab">rm_sab</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Create new string value, alt. sort seq., from binary</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_is_s" href="#rm_is_s">rm_is_s</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is string?</span><br>
+      <span class="navproc1"><a id="_rm_is_sa" href="#rm_is_sa">rm_is_sa</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Is string with alt. sort seq.?</span><br>
+      <br>
+      <span class="navproc1"><a id="_rm_s_" href="#rm_s_">rm_s_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert string to RPG utf-8 character data</span><br>
+      <span class="navproc1"><a id="_rm_s__" href="#rm_s__">rm_s__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the string</span><br>
+      <span class="navproc1"><a id="_rm_s1_" href="#rm_s1_">rm_s1_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert string to RPG utf-8 character data (100)</span><br>
+      <span class="navproc1"><a id="_rm_s1__" href="#rm_s1__">rm_s1__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the string</span><br>
+      <span class="navproc1"><a id="_rm_s2_" href="#rm_s2_">rm_s2_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert string to RPG utf-8 character data (1000)</span><br>
+      <span class="navproc1"><a id="_rm_s2__" href="#rm_s2__">rm_s2__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the string</span><br>
+      <span class="navproc1"><a id="_rm_s3_" href="#rm_s3_">rm_s3_</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Convert string to RPG utf-8 character data (10000)</span><br>
+      <span class="navproc1"><a id="_rm_s3__" href="#rm_s3__">rm_s3__</a></span><span class="navproc2">&nbsp;&#x22C5;&nbsp;Same, and dispose the string</span><br>
+      <br>
+      <span class="navproc3"><a id="_rm_add_event_handler" href="#rm_add_event_handler">rm_add_event_handler</a></span><br><span class="navproc4">Add an event handler to a map</span><br>
+      <span class="navproc3"><a id="_rm_remove_event_handler" href="#rm_remove_event_handler">rm_remove_event_handler</a></span><br><span class="navproc4">Remove an event handler from a map</span><br>
       <br><br>
       <hr>
       <div style="height:100vh;"></div>
     </div>
     <div id="content">
       <noscript><p>.&nbsp;.&nbsp;.&nbsp;&nbsp;Need&nbsp;JavaScript&nbsp;&nbsp;.&nbsp;.&nbsp;.</p></noscript>
-      <script src="content/introduction.js?v=2"></script><br><br>
-      <script src="content/examples.js?v=2"></script><br><br>
-      <script src="content/example_1.js?v=2"></script><br><br>
-      <script src="content/example_2.js?v=2"></script><br><br>
-      <script src="content/example_3.js?v=2"></script><br><br>
+      <script src="content/introduction.js"></script><br><br>
+      <script src="content/examples.js"></script><br><br>
+      <script src="content/example_1.js"></script><br><br>
+      <script src="content/example_2.js"></script><br><br>
+      <script src="content/example_3.js"></script><br><br>
       <br><br><br><br>
-      <script src="content/usage.js?v=2"></script><br><br>
-      <script src="content/mapval.js?v=2"></script><br><br>
-      <script src="content/amemmgt.js?v=2"></script><br><br>
-      <script src="content/cursors.js?v=2"></script><br><br>
-      <script src="content/vectors.js?v=2"></script><br><br>
-      <script src="content/sortord.js?v=2"></script><br><br>
-      <script src="content/cycles.js?v=2"></script><br><br>
-      <script src="content/threads.js?v=2"></script><br><br>
-      <script src="content/longprnms.js?v=2"></script><br><br>
-      <script src="content/restrict.js?v=2"></script><br><br>
-      <script src="content/escmsgs.js?v=2"></script><br><br>
+      <script src="content/usage.js"></script><br><br>
+      <script src="content/mapval.js"></script><br><br>
+      <script src="content/amemmgt.js"></script><br><br>
+      <script src="content/cursors.js"></script><br><br>
+      <script src="content/vectors.js"></script><br><br>
+      <script src="content/sortord.js"></script><br><br>
+      <script src="content/cycles.js"></script><br><br>
+      <script src="content/threads.js"></script><br><br>
+      <script src="content/longprnms.js"></script><br><br>
+      <script src="content/restrict.js"></script><br><br>
+      <script src="content/escmsgs.js"></script><br><br>
       <br><br><br><br>
-      <script src="content/installation.js?v=2"></script><br><br>
+      <script src="content/installation.js"></script><br><br>
       <br><br><br><br>
-      <script src="content/api.js?v=2"></script><br><br>
+      <script src="content/api.js"></script><br><br>
       <br><br>
-      <script src="content/rm_m.js?v=2"></script><br><br>
-      <script src="content/rm_mm.js?v=2"></script><br><br>
-      <script src="content/rm_v.js?v=2"></script><br><br>
-      <script src="content/rm_ism.js?v=2"></script><br><br>
-      <script src="content/rm_ismm.js?v=2"></script><br><br>
-      <script src="content/rm_isv.js?v=2"></script><br><br>
-      <script src="content/rm_inm.js?v=2"></script><br><br>
-      <script src="content/rm_mmm.js?v=2"></script><br><br>
-      <script src="content/rm_mmi.js?v=2"></script><br><br>
-      <script src="content/rm_dis.js?v=2"></script><br><br>
-      <script src="content/rm_ins.js?v=2"></script><br><br>
-      <script src="content/rm_ins1.js?v=2"></script><br><br>
-      <script src="content/rm_insm.js?v=2"></script><br><br>
-      <script src="content/rm_insc.js?v=2"></script><br><br>
-      <script src="content/rm_insc1.js?v=2"></script><br><br>
-      <script src="content/rm_inscm.js?v=2"></script><br><br>
-      <script src="content/rm_insx.js?v=2"></script><br><br>
-      <script src="content/rm_insx1.js?v=2"></script><br><br>
-      <script src="content/rm_insxm.js?v=2"></script><br><br>
-      <script src="content/rm_rmv.js?v=2"></script><br><br>
-      <script src="content/rm_rmva.js?v=2"></script><br><br>
-      <script src="content/rm_cmp.js?v=2"></script><br><br>
-      <script src="content/rm_ceq.js?v=2"></script><br><br>
-      <script src="content/rm_clt.js?v=2"></script><br><br>
-      <script src="content/rm_cle.js?v=2"></script><br><br>
-      <script src="content/rm_cgt.js?v=2"></script><br><br>
-      <script src="content/rm_cge.js?v=2"></script><br><br>
-      <script src="content/rm_.js?v=2"></script><br><br>
-      <script src="content/rm_get.js?v=2"></script><br><br>
-      <script src="content/rm__.js?v=2"></script><br><br>
-      <script src="content/rm__i.js?v=2"></script><br><br>
-      <script src="content/rm__p.js?v=2"></script><br><br>
-      <script src="content/rm__d.js?v=2"></script><br><br>
-      <script src="content/rm__t.js?v=2"></script><br><br>
-      <script src="content/rm__z.js?v=2"></script><br><br>
-      <script src="content/rm__n.js?v=2"></script><br><br>
-      <script src="content/rm__x.js?v=2"></script><br><br>
-      <script src="content/rm__xp.js?v=2"></script><br><br>
-      <script src="content/rm__a.js?v=2"></script><br><br>
-      <script src="content/rm__aa.js?v=2"></script><br><br>
-      <script src="content/rm__s.js?v=2"></script><br><br>
-      <script src="content/rm__sa.js?v=2"></script><br><br>
-      <script src="content/rm_hky.js?v=2"></script><br><br>
-      <script src="content/rm_hks.js?v=2"></script><br><br>
-      <script src="content/rm_num.js?v=2"></script><br><br>
-      <script src="content/rm_hit.js?v=2"></script><br><br>
-      <script src="content/rm_nit.js?v=2"></script><br><br>
-      <script src="content/rm_gik.js?v=2"></script><br><br>
-      <script src="content/rm_cpy.js?v=2"></script><br><br>
-      <script src="content/rm_cpyd.js?v=2"></script><br><br>
-      <script src="content/rm_cur.js?v=2"></script><br><br>
-      <script src="content/rm_sll.js?v=2"></script><br><br>
-      <script src="content/rm_sgt.js?v=2"></script><br><br>
-      <script src="content/rm_rdn.js?v=2"></script><br><br>
-      <script src="content/rm_rdp.js?v=2"></script><br><br>
-      <script src="content/rm_key.js?v=2"></script><br><br>
-      <script src="content/rm_itm.js?v=2"></script><br><br>
-      <script src="content/rm_slln.js?v=2"></script><br><br>
-      <script src="content/rm_sgtp.js?v=2"></script><br><br>
-      <script src="content/rm_hsn.js?v=2"></script><br><br>
-      <script src="content/rm_hsp.js?v=2"></script><br><br>
-      <script src="content/rm_fed.js?v=2"></script><br><br>
-      <script src="content/rm_fedr.js?v=2"></script><br><br>
-      <script src="content/rm_scf.js?v=2"></script><br><br>
-      <script src="content/rm_gcf.js?v=2"></script><br><br>
-      <script src="content/rm_sav.js?v=2"></script><br><br>
-      <script src="content/rm_gav.js?v=2"></script><br><br>
-      <script src="content/rm_usrd.js?v=2"></script><br><br>
+      <script src="content/rm_m.js"></script><br><br>
+      <script src="content/rm_mm.js"></script><br><br>
+      <script src="content/rm_v.js"></script><br><br>
+      <script src="content/rm_is_m.js"></script><br><br>
+      <script src="content/rm_is_mm.js"></script><br><br>
+      <script src="content/rm_is_v.js"></script><br><br>
+      <script src="content/rm_in_map.js"></script><br><br>
+      <script src="content/rm_make_map_man_disp.js"></script><br><br>
+      <script src="content/rm_make_map_immutable.js"></script><br><br>
+      <script src="content/rm_dispose.js"></script><br><br>
+      <script src="content/rm_insert.js"></script><br><br>
+      <script src="content/rm_insert_1.js"></script><br><br>
+      <script src="content/rm_insert_map.js"></script><br><br>
+      <script src="content/rm_insert_c.js"></script><br><br>
+      <script src="content/rm_insert_c_1.js"></script><br><br>
+      <script src="content/rm_insert_c_map.js"></script><br><br>
+      <script src="content/rm_insert_x.js"></script><br><br>
+      <script src="content/rm_insert_x_1.js"></script><br><br>
+      <script src="content/rm_insert_x_map.js"></script><br><br>
+      <script src="content/rm_remove.js"></script><br><br>
+      <script src="content/rm_remove_all.js"></script><br><br>
+      <script src="content/rm_compare.js"></script><br><br>
+      <script src="content/rm_compare_eq.js"></script><br><br>
+      <script src="content/rm_compare_lt.js"></script><br><br>
+      <script src="content/rm_compare_le.js"></script><br><br>
+      <script src="content/rm_compare_gt.js"></script><br><br>
+      <script src="content/rm_compare_ge.js"></script><br><br>
+      <script src="content/rm_.js"></script><br><br>
+      <script src="content/rm_get.js"></script><br><br>
+      <script src="content/rm__.js"></script><br><br>
+      <script src="content/rm__i.js"></script><br><br>
+      <script src="content/rm__p.js"></script><br><br>
+      <script src="content/rm__d.js"></script><br><br>
+      <script src="content/rm__t.js"></script><br><br>
+      <script src="content/rm__z.js"></script><br><br>
+      <script src="content/rm__n.js"></script><br><br>
+      <script src="content/rm__x.js"></script><br><br>
+      <script src="content/rm__xp.js"></script><br><br>
+      <script src="content/rm__a.js"></script><br><br>
+      <script src="content/rm__aa.js"></script><br><br>
+      <script src="content/rm__s.js"></script><br><br>
+      <script src="content/rm__sa.js"></script><br><br>
+      <script src="content/rm_has_key.js"></script><br><br>
+      <script src="content/rm_has_keys.js"></script><br><br>
+      <script src="content/rm_num.js"></script><br><br>
+      <script src="content/rm_has_item.js"></script><br><br>
+      <script src="content/rm_num_items.js"></script><br><br>
+      <script src="content/rm_get_item_key.js"></script><br><br>
+      <script src="content/rm_copy.js"></script><br><br>
+      <script src="content/rm_copy_deep.js"></script><br><br>
+      <script src="content/rm_cursor.js"></script><br><br>
+      <script src="content/rm_setll.js"></script><br><br>
+      <script src="content/rm_setgt.js"></script><br><br>
+      <script src="content/rm_read_next.js"></script><br><br>
+      <script src="content/rm_read_prev.js"></script><br><br>
+      <script src="content/rm_key.js"></script><br><br>
+      <script src="content/rm_item.js"></script><br><br>
+      <script src="content/rm_setll_read_next.js"></script><br><br>
+      <script src="content/rm_setgt_read_prev.js"></script><br><br>
+      <script src="content/rm_has_next.js"></script><br><br>
+      <script src="content/rm_has_prev.js"></script><br><br>
+      <script src="content/rm_for_each_do.js"></script><br><br>
+      <script src="content/rm_for_each_do_rev.js"></script><br><br>
+      <script src="content/rm_set_comp_fun.js"></script><br><br>
+      <script src="content/rm_get_comp_fun.js"></script><br><br>
+      <script src="content/rm_set_attr_val.js"></script><br><br>
+      <script src="content/rm_get_attr_val.js"></script><br><br>
+      <script src="content/rm_user_data.js"></script><br><br>
       <br><br>
-      <script src="content/rm_i.js?v=2"></script><br><br>
-      <script src="content/rm_i1.js?v=2"></script><br><br>
-      <script src="content/rm_i2.js?v=2"></script><br><br>
-      <script src="content/rm_isi.js?v=2"></script><br><br>
-      <script src="content/rm_isi1.js?v=2"></script><br><br>
-      <script src="content/rm_isi2.js?v=2"></script><br><br>
-      <script src="content/rm_i_.js?v=2"></script><br><br>
-      <script src="content/rm_i__.js?v=2"></script><br><br>
-      <script src="content/rm_i1_.js?v=2"></script><br><br>
-      <script src="content/rm_i1__.js?v=2"></script><br><br>
-      <script src="content/rm_i2_.js?v=2"></script><br><br>
-      <script src="content/rm_i2__.js?v=2"></script><br><br>
-      <script src="content/rm_p.js?v=2"></script><br><br>
-      <script src="content/rm_p1.js?v=2"></script><br><br>
-      <script src="content/rm_p2.js?v=2"></script><br><br>
-      <script src="content/rm_p3.js?v=2"></script><br><br>
-      <script src="content/rm_isp.js?v=2"></script><br><br>
-      <script src="content/rm_isp1.js?v=2"></script><br><br>
-      <script src="content/rm_isp2.js?v=2"></script><br><br>
-      <script src="content/rm_isp3.js?v=2"></script><br><br>
-      <script src="content/rm_p_.js?v=2"></script><br><br>
-      <script src="content/rm_p__.js?v=2"></script><br><br>
-      <script src="content/rm_p1_.js?v=2"></script><br><br>
-      <script src="content/rm_p1__.js?v=2"></script><br><br>
-      <script src="content/rm_p2_.js?v=2"></script><br><br>
-      <script src="content/rm_p2__.js?v=2"></script><br><br>
-      <script src="content/rm_p3_.js?v=2"></script><br><br>
-      <script src="content/rm_p3__.js?v=2"></script><br><br>
-      <script src="content/rm_d.js?v=2"></script><br><br>
-      <script src="content/rm_t.js?v=2"></script><br><br>
-      <script src="content/rm_z.js?v=2"></script><br><br>
-      <script src="content/rm_isd.js?v=2"></script><br><br>
-      <script src="content/rm_ist.js?v=2"></script><br><br>
-      <script src="content/rm_isz.js?v=2"></script><br><br>
-      <script src="content/rm_d_.js?v=2"></script><br><br>
-      <script src="content/rm_d__.js?v=2"></script><br><br>
-      <script src="content/rm_t_.js?v=2"></script><br><br>
-      <script src="content/rm_t__.js?v=2"></script><br><br>
-      <script src="content/rm_z_.js?v=2"></script><br><br>
-      <script src="content/rm_z__.js?v=2"></script><br><br>
-      <script src="content/rm_n.js?v=2"></script><br><br>
-      <script src="content/rm_isn.js?v=2"></script><br><br>
-      <script src="content/rm_n_.js?v=2"></script><br><br>
-      <script src="content/rm_n__.js?v=2"></script><br><br>
-      <script src="content/rm_x.js?v=2"></script><br><br>
-      <script src="content/rm_isx.js?v=2"></script><br><br>
-      <script src="content/rm_x_.js?v=2"></script><br><br>
-      <script src="content/rm_x__.js?v=2"></script><br><br>
-      <script src="content/rm_xp.js?v=2"></script><br><br>
-      <script src="content/rm_isxp.js?v=2"></script><br><br>
-      <script src="content/rm_xp_.js?v=2"></script><br><br>
-      <script src="content/rm_xp__.js?v=2"></script><br><br>
-      <script src="content/rm_a.js?v=2"></script><br><br>
-      <script src="content/rm_ap.js?v=2"></script><br><br>
-      <script src="content/rm_aa.js?v=2"></script><br><br>
-      <script src="content/rm_aap.js?v=2"></script><br><br>
-      <script src="content/rm_isa.js?v=2"></script><br><br>
-      <script src="content/rm_isaa.js?v=2"></script><br><br>
-      <script src="content/rm_a_.js?v=2"></script><br><br>
-      <script src="content/rm_a__.js?v=2"></script><br><br>
-      <script src="content/rm_a1_.js?v=2"></script><br><br>
-      <script src="content/rm_a1__.js?v=2"></script><br><br>
-      <script src="content/rm_a2_.js?v=2"></script><br><br>
-      <script src="content/rm_a2__.js?v=2"></script><br><br>
-      <script src="content/rm_a3_.js?v=2"></script><br><br>
-      <script src="content/rm_a3__.js?v=2"></script><br><br>
-      <script src="content/rm_s.js?v=2"></script><br><br>
-      <script src="content/rm_sb.js?v=2"></script><br><br>
-      <script src="content/rm_sa.js?v=2"></script><br><br>
-      <script src="content/rm_sab.js?v=2"></script><br><br>
-      <script src="content/rm_iss.js?v=2"></script><br><br>
-      <script src="content/rm_issa.js?v=2"></script><br><br>
-      <script src="content/rm_s_.js?v=2"></script><br><br>
-      <script src="content/rm_s__.js?v=2"></script><br><br>
-      <script src="content/rm_s1_.js?v=2"></script><br><br>
-      <script src="content/rm_s1__.js?v=2"></script><br><br>
-      <script src="content/rm_s2_.js?v=2"></script><br><br>
-      <script src="content/rm_s2__.js?v=2"></script><br><br>
-      <script src="content/rm_s3_.js?v=2"></script><br><br>
-      <script src="content/rm_s3__.js?v=2"></script><br><br>
+      <script src="content/rm_i.js"></script><br><br>
+      <script src="content/rm_i1.js"></script><br><br>
+      <script src="content/rm_i2.js"></script><br><br>
+      <script src="content/rm_is_i.js"></script><br><br>
+      <script src="content/rm_is_i1.js"></script><br><br>
+      <script src="content/rm_is_i2.js"></script><br><br>
+      <script src="content/rm_i_.js"></script><br><br>
+      <script src="content/rm_i__.js"></script><br><br>
+      <script src="content/rm_i1_.js"></script><br><br>
+      <script src="content/rm_i1__.js"></script><br><br>
+      <script src="content/rm_i2_.js"></script><br><br>
+      <script src="content/rm_i2__.js"></script><br><br>
+      <script src="content/rm_p.js"></script><br><br>
+      <script src="content/rm_p1.js"></script><br><br>
+      <script src="content/rm_p2.js"></script><br><br>
+      <script src="content/rm_p3.js"></script><br><br>
+      <script src="content/rm_is_p.js"></script><br><br>
+      <script src="content/rm_is_p1.js"></script><br><br>
+      <script src="content/rm_is_p2.js"></script><br><br>
+      <script src="content/rm_is_p3.js"></script><br><br>
+      <script src="content/rm_p_.js"></script><br><br>
+      <script src="content/rm_p__.js"></script><br><br>
+      <script src="content/rm_p1_.js"></script><br><br>
+      <script src="content/rm_p1__.js"></script><br><br>
+      <script src="content/rm_p2_.js"></script><br><br>
+      <script src="content/rm_p2__.js"></script><br><br>
+      <script src="content/rm_p3_.js"></script><br><br>
+      <script src="content/rm_p3__.js"></script><br><br>
+      <script src="content/rm_d.js"></script><br><br>
+      <script src="content/rm_t.js"></script><br><br>
+      <script src="content/rm_z.js"></script><br><br>
+      <script src="content/rm_is_d.js"></script><br><br>
+      <script src="content/rm_is_t.js"></script><br><br>
+      <script src="content/rm_is_z.js"></script><br><br>
+      <script src="content/rm_d_.js"></script><br><br>
+      <script src="content/rm_d__.js"></script><br><br>
+      <script src="content/rm_t_.js"></script><br><br>
+      <script src="content/rm_t__.js"></script><br><br>
+      <script src="content/rm_z_.js"></script><br><br>
+      <script src="content/rm_z__.js"></script><br><br>
+      <script src="content/rm_n.js"></script><br><br>
+      <script src="content/rm_is_n.js"></script><br><br>
+      <script src="content/rm_n_.js"></script><br><br>
+      <script src="content/rm_n__.js"></script><br><br>
+      <script src="content/rm_x.js"></script><br><br>
+      <script src="content/rm_is_x.js"></script><br><br>
+      <script src="content/rm_x_.js"></script><br><br>
+      <script src="content/rm_x__.js"></script><br><br>
+      <script src="content/rm_xp.js"></script><br><br>
+      <script src="content/rm_is_xp.js"></script><br><br>
+      <script src="content/rm_xp_.js"></script><br><br>
+      <script src="content/rm_xp__.js"></script><br><br>
+      <script src="content/rm_a.js"></script><br><br>
+      <script src="content/rm_ap.js"></script><br><br>
+      <script src="content/rm_aa.js"></script><br><br>
+      <script src="content/rm_aap.js"></script><br><br>
+      <script src="content/rm_is_a.js"></script><br><br>
+      <script src="content/rm_is_aa.js"></script><br><br>
+      <script src="content/rm_a_.js"></script><br><br>
+      <script src="content/rm_a__.js"></script><br><br>
+      <script src="content/rm_a1_.js"></script><br><br>
+      <script src="content/rm_a1__.js"></script><br><br>
+      <script src="content/rm_a2_.js"></script><br><br>
+      <script src="content/rm_a2__.js"></script><br><br>
+      <script src="content/rm_a3_.js"></script><br><br>
+      <script src="content/rm_a3__.js"></script><br><br>
+      <script src="content/rm_s.js"></script><br><br>
+      <script src="content/rm_sb.js"></script><br><br>
+      <script src="content/rm_sa.js"></script><br><br>
+      <script src="content/rm_sab.js"></script><br><br>
+      <script src="content/rm_is_s.js"></script><br><br>
+      <script src="content/rm_is_sa.js"></script><br><br>
+      <script src="content/rm_s_.js"></script><br><br>
+      <script src="content/rm_s__.js"></script><br><br>
+      <script src="content/rm_s1_.js"></script><br><br>
+      <script src="content/rm_s1__.js"></script><br><br>
+      <script src="content/rm_s2_.js"></script><br><br>
+      <script src="content/rm_s2__.js"></script><br><br>
+      <script src="content/rm_s3_.js"></script><br><br>
+      <script src="content/rm_s3__.js"></script><br><br>
       <br><br>
-      <script src="content/rm_add_event_handler.js?v=2"></script><br><br>
-      <script src="content/rm_remove_event_handler.js?v=2"></script><br><br>
+      <script src="content/rm_add_event_handler.js"></script><br><br>
+      <script src="content/rm_remove_event_handler.js"></script><br><br>
       <br><br>
       <hr>
       <div id="-" style="height:100vh;"></div>
     </div>
   </div>
   <div id="cpyr">
-    <a style="color: #999; user-select: none; outline: none;" href="https://johnerps.com" target="_blank" tabindex="-1">&#x00A9 2017-2018 John Erps</a>
+    <a style="color: #999; user-select: none; outline: none;" href="https://johnerps.com" target="_blank" tabindex="-1">&#x00A9; 2017-2018 John Erps</a>
   </div>
 <script>
+  var ver = "v1.2.1";
   var DOCSTAG = "api";
   var scrolled = false;
   var animatedScroll = false;
   var lastAnimatedScroll = false;
   $(document).ready(function() {
-    drawemver("v1.2.1", [112,114,109,103,112,97,106,64,104,111,101,110,112,114,46,115,111,99,109]);
+    drawemver(ver, [112,114,109,103,112,97,106,64,104,111,101,110,112,114,46,115,111,99,109]);
     $(window).bind("popstate", function(e) {
       if (window.location.hash.length > 1)
         gototag(window.location.hash.substring(1), true, true);
@@ -600,7 +617,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     return s;
   }
   function drawemver(v, e) {
-    var fs = 14, a = 0.55, d1 = 600, d2 = 2000, d3 = 12000;
+    var fs = 14, a = 0.65, d1 = 600, d2 = 2000, d3 = 12000;
     var c = document.getElementById("emver"), cc = c.getContext("2d");
     var oc = document.createElement("canvas"), occ = oc.getContext("2d");
     var r = dprbspr(occ), iv, ie1, ie2, f, n = 0, t, x, y, w, h;
@@ -677,7 +694,3 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </script>
 </body>
 </html>
-
-<!--
------
--->

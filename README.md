@@ -10,11 +10,19 @@
 
 ### License
 
-RpgMap is [MIT Licensed](LICENSE.md). You may use, distribute and copy it under the license terms.
+RpgMap is [MIT Licensed](LICENSE). You may use, distribute and copy it under the license terms.
 
 File RPGMAPRBTC.C (RedBlackTree implementation) was originally developed by Emin Martinian.
 
+***
+
 ### Changes
+
+* v2.0.0
+
+  * Removed distinction between long and short procedurenames. Procedures all have long names now.
+
+  * Renamed procedures `rm_is*` to `rm_is_`.
 
 * v1.2.1 (march 2019)
 

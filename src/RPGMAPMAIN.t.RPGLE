@@ -1,6 +1,6 @@
 **FREE
 
-// RPGMAPMAIN.RPGLE - RpgMap Main 
+// RPGMAPMAIN.RPGLE - RpgMap Main
 // (c) 2017-2018 John Erps
 
 
@@ -13,7 +13,6 @@ ctl-opt nomain datfmt(*iso-) timfmt(*iso.) ccsid(*exact);
 /include RPGMAPVALH.RPGLE
 /include RPGMAPSYSH.RPGLE
 /include RPGMAPRBTC.RPGLE
-/include RPGMAPGMFH.RPGLE
 
 
 // ----- Options
@@ -49,18 +48,18 @@ dcl-proc rm_m export;
   dcl-s i pointer dim(100) static;
   dcl-s m pointer;
   dcl-s x int(10);
-  
+
   na = %div(%parms+1:2);
 
   if na > 0;
     %subarr(k:1:na) = *null;
     %subarr(i:1:na) = *null;
   endif;
-  
+
 /include RPGMAPI101.RPGLE
-  
+
   m = RMValMapCrt(x'00');
-  
+
   for x = 1 to na;
     if     k(x) <> *null
        and RMMInsert(m:0:k(x):i(x));
@@ -68,11 +67,11 @@ dcl-proc rm_m export;
       i(x) = *null;
     endif;
   endfor;
-  
+
   return m;
 
   on-exit;
-  
+
   for x = 1 to na;
     if k(x) <> *null;
       RMMDisposeArg(k(x));
@@ -81,7 +80,7 @@ dcl-proc rm_m export;
       RMMDisposeArg(i(x));
     endif;
   endfor;
-  
+
 end-proc;
 
 
@@ -97,9 +96,9 @@ dcl-proc rm_mm export;
   dcl-s i pointer dim(100) static;
   dcl-s m pointer;
   dcl-s x int(10);
-  
+
   na = %div(%parms+1:2);
-  
+
   if na > 0;
     %subarr(k:1:na) = *null;
     %subarr(i:1:na) = *null;
@@ -108,7 +107,7 @@ dcl-proc rm_mm export;
 /include RPGMAPI101.RPGLE
 
   m = RMValMapCrt(x'01');
-  
+
   for x = 1 to na;
     if     k(x) <> *null
        and RMMInsert(m:0:k(x):i(x));
@@ -116,11 +115,11 @@ dcl-proc rm_mm export;
       i(x) = *null;
     endif;
   endfor;
-  
+
   return m;
 
   on-exit;
-  
+
   for x = 1 to na;
     if k(x) <> *null;
       RMMDisposeArg(k(x));
@@ -129,7 +128,7 @@ dcl-proc rm_mm export;
       RMMDisposeArg(i(x));
     endif;
   endfor;
-  
+
 end-proc;
 
 
@@ -146,9 +145,9 @@ dcl-proc rm_v export;
   dcl-s k int(10);
   dcl-s kv pointer inz(*null);
   dcl-s x int(10);
-  
+
   na = %parms;
-  
+
   if na > 0;
     %subarr(i:1:na) = *null;
   endif;
@@ -156,7 +155,7 @@ dcl-proc rm_v export;
 /include RPGMAPI102.RPGLE
 
   m = RMValMapCrt(x'02');
-  
+
   k = 0;
   for x = 1 to na;
     if i(x) <> *null;
@@ -168,11 +167,11 @@ dcl-proc rm_v export;
       endif;
     endif;
   endfor;
-  
+
   return m;
 
   on-exit;
-  
+
   if kv <> *null;
     RMMDisposeArg(kv);
   endif;
@@ -181,74 +180,74 @@ dcl-proc rm_v export;
       RMMDisposeArg(i(x));
     endif;
   endfor;
-  
+
 end-proc;
 
 
-// ----- RM_ISM <<<<<<<<<<
-dcl-proc rm_ism export;
+// ----- RM_IS_M <<<<<<<<<<
+dcl-proc rm_is_m export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsMap(obj);
-    
+
 end-proc;
 
 
-// ----- RM_ISMM <<<<<<<<<<
-dcl-proc rm_ismm export;
+// ----- RM_IS_MM <<<<<<<<<<
+dcl-proc rm_is_mm export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsMap(obj:*off:*on);
-    
+
 end-proc;
 
 
-// ----- RM_ISV <<<<<<<<<<
-dcl-proc rm_isv export;
+// ----- RM_IS_V <<<<<<<<<<
+dcl-proc rm_is_v export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsMap(obj:*on);
-    
+
 end-proc;
 
 
-// ----- RM_INM <<<<<<<<<<
-dcl-proc rm_inm export;
+// ----- RM_IN_MAP <<<<<<<<<<
+dcl-proc rm_in_map export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValInMap(obj);
-    
+
 end-proc;
 
 
-// ----- RM_MMM <<<<<<<<<<
-dcl-proc rm_mmm export;
+// ----- RM_MAKE_MAP_MAN_DISP <<<<<<<<<<
+dcl-proc rm_make_map_man_disp export;
 
   dcl-pi *n pointer;
     map pointer value;
   end-pi;
 
   RMValMakeMapManDisp(map);
-  
+
   return map;
-      
+
 end-proc;
 
 
-// ----- RM_MMI <<<<<<<<<<
-dcl-proc rm_mmi export;
+// ----- RM_MAKE_MAP_IMMUTABLE <<<<<<<<<<
+dcl-proc rm_make_map_immutable export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -267,14 +266,14 @@ dcl-proc rm_mmi export;
 
   RMValTestIfMap(map);
   RMValMakeMapImmut(map:mm);
-  
+
   return map;
-      
+
 end-proc;
 
 
-// ----- RM_DIS <<<<<<<<<<
-dcl-proc rm_dis export;
+// ----- RM_DISPOSE <<<<<<<<<<
+dcl-proc rm_dispose export;
 
   dcl-pi *n;
 /include _TLIB_/INCLUDERPG,RPGMAPI003
@@ -285,7 +284,7 @@ dcl-proc rm_dis export;
   dcl-s i int(10);
 
   na = %parms;
-  
+
   if na > 0;
     %subarr(o:1:na) = *null;
   endif;
@@ -297,14 +296,14 @@ dcl-proc rm_dis export;
       RMValDispose2(o(i));
     endif;
   endfor;
-  
+
   return;
-    
+
 end-proc;
 
 
-// ----- RM_INS <<<<<<<<<<
-dcl-proc rm_ins export;
+// ----- RM_INSERT <<<<<<<<<<
+dcl-proc rm_insert export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -315,7 +314,7 @@ dcl-proc rm_ins export;
   dcl-s k pointer dim(100) static;
   dcl-s i pointer dim(100) static;
   dcl-s x int(10);
-  
+
   na = %div(%parms:2);
 
   if na > 0;
@@ -332,11 +331,11 @@ dcl-proc rm_ins export;
       i(x) = *null;
     endif;
   endfor;
-  
+
   return map;
-  
+
   on-exit;
-  
+
   for x = 1 to na;
     if k(x) <> *null;
       RMMDisposeArg(k(x));
@@ -345,12 +344,12 @@ dcl-proc rm_ins export;
       RMMDisposeArg(i(x));
     endif;
   endfor;
-      
+
 end-proc;
 
 
-// ----- RM_INS1 <<<<<<<<<<
-dcl-proc rm_ins1 export;
+// ----- RM_INSERT_1 <<<<<<<<<<
+dcl-proc rm_insert_1 export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -360,36 +359,36 @@ dcl-proc rm_ins1 export;
 
   dcl-s k pointer inz(*null);
   dcl-s i pointer inz(*null);
-  
+
   if %parms > 1;
     k = key;
   endif;
   if %parms > 2;
     i = item;
   endif;
-  
+
   if     k <> *null
      and RMMInsert(map:0:k:i);
     k = *null;
     i = *null;
   endif;
-  
+
   return map;
-  
+
   on-exit;
-  
+
   if k <> *null;
     RMMDisposeArg(k);
   endif;
   if i <> *null;
     RMMDisposeArg(i);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_INSM <<<<<<<<<<
-dcl-proc rm_insm export;
+// ----- RM_INSERT_MAP <<<<<<<<<<
+dcl-proc rm_insert_map export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -397,7 +396,7 @@ dcl-proc rm_insm export;
     key1 pointer value options(*nopass);
     key2 pointer value options(*nopass);
   end-pi;
-  
+
   if %parms < 3;
     RMMInsertFromMap(map:0:map2);
   elseif %parms < 4;
@@ -405,23 +404,23 @@ dcl-proc rm_insm export;
   else;
     RMMInsertFromMap(map:0:map2:key1:key2);
   endif;
-  
+
   return map;
-  
+
   on-exit;
-  
+
   if %parms > 2 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 3 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_INSC <<<<<<<<<<
-dcl-proc rm_insc export;
+// ----- RM_INSERT_C <<<<<<<<<<
+dcl-proc rm_insert_c export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -434,7 +433,7 @@ dcl-proc rm_insc export;
   dcl-s x int(10);
 
   na = %div(%parms:2);
-  
+
   if na > 0;
     %subarr(k:1:na) = *null;
     %subarr(i:1:na) = *null;
@@ -449,11 +448,11 @@ dcl-proc rm_insc export;
       i(x) = *null;
     endif;
   endfor;
-  
+
   return map;
-  
+
   on-exit;
-  
+
   for x = 1 to na;
     if k(x) <> *null;
       RMMDisposeArg(k(x));
@@ -462,12 +461,12 @@ dcl-proc rm_insc export;
       RMMDisposeArg(i(x));
     endif;
   endfor;
-    
+
 end-proc;
 
 
-// ----- RM_INSC1 <<<<<<<<<<
-dcl-proc rm_insc1 export;
+// ----- RM_INSERT_C_1 <<<<<<<<<<
+dcl-proc rm_insert_c_1 export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -477,36 +476,36 @@ dcl-proc rm_insc1 export;
 
   dcl-s k pointer inz(*null);
   dcl-s i pointer inz(*null);
-  
+
   if %parms > 1;
     k = key;
   endif;
   if %parms > 2;
     i = item;
   endif;
-  
+
   if     k <> *null
      and RMMInsert(map:2:k:i);
     k = *null;
     i = *null;
   endif;
-  
+
   return map;
-  
+
   on-exit;
-  
+
   if k <> *null;
     RMMDisposeArg(k);
   endif;
   if i <> *null;
     RMMDisposeArg(i);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_INSCM <<<<<<<<<<
-dcl-proc rm_inscm export;
+// ----- RM_INSERT_C_MAP <<<<<<<<<<
+dcl-proc rm_insert_c_map export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -514,7 +513,7 @@ dcl-proc rm_inscm export;
     key1 pointer value options(*nopass);
     key2 pointer value options(*nopass);
   end-pi;
-  
+
   if %parms < 3;
     RMMInsertFromMap(map:2:map2);
   elseif %parms < 4;
@@ -522,23 +521,23 @@ dcl-proc rm_inscm export;
   else;
     RMMInsertFromMap(map:2:map2:key1:key2);
   endif;
-  
+
   return map;
-  
+
   on-exit;
-  
+
   if %parms > 2 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 3 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_INSX <<<<<<<<<<
-dcl-proc rm_insx export;
+// ----- RM_INSERT_X <<<<<<<<<<
+dcl-proc rm_insert_x export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -551,14 +550,14 @@ dcl-proc rm_insx export;
   dcl-s x int(10);
 
   na = %div(%parms:2);
-  
+
   if na > 0;
     %subarr(k:1:na) = *null;
     %subarr(i:1:na) = *null;
   endif;
 
 /include RPGMAPI104.RPGLE
-  
+
   for x = 1 to na;
     if     k(x) <> *null
        and RMMInsert(map:1:k(x):i(x));
@@ -566,11 +565,11 @@ dcl-proc rm_insx export;
       i(x) = *null;
     endif;
   endfor;
-  
+
   return map;
-  
+
   on-exit;
-  
+
   for x = 1 to na;
     if k(x) <> *null;
       RMMDisposeArg(k(x));
@@ -579,12 +578,12 @@ dcl-proc rm_insx export;
       RMMDisposeArg(i(x));
     endif;
   endfor;
-    
+
 end-proc;
 
 
-// ----- RM_INSX1 <<<<<<<<<<
-dcl-proc rm_insx1 export;
+// ----- RM_INSERT_X_1 <<<<<<<<<<
+dcl-proc rm_insert_x_1 export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -594,36 +593,36 @@ dcl-proc rm_insx1 export;
 
   dcl-s k pointer inz(*null);
   dcl-s i pointer inz(*null);
-  
+
   if %parms > 1;
     k = key;
   endif;
   if %parms > 2;
     i = item;
   endif;
-  
+
   if     k <> *null
      and RMMInsert(map:1:k:i);
     k = *null;
     i = *null;
   endif;
-  
+
   return map;
-  
+
   on-exit;
-  
+
   if k <> *null;
     RMMDisposeArg(k);
   endif;
   if i <> *null;
     RMMDisposeArg(i);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_INSXM <<<<<<<<<<
-dcl-proc rm_insxm export;
+// ----- RM_INSERT_X_MAP <<<<<<<<<<
+dcl-proc rm_insert_x_map export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -631,7 +630,7 @@ dcl-proc rm_insxm export;
     key1 pointer value options(*nopass);
     key2 pointer value options(*nopass);
   end-pi;
-  
+
   if %parms < 3;
     RMMInsertFromMap(map:1:map2);
   elseif %parms < 4;
@@ -639,23 +638,23 @@ dcl-proc rm_insxm export;
   else;
     RMMInsertFromMap(map:1:map2:key1:key2);
   endif;
-  
+
   return map;
-  
+
   on-exit;
-  
+
   if %parms > 2 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 3 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_RMV <<<<<<<<<<
-dcl-proc rm_rmv export;
+// ----- RM_REMOVE <<<<<<<<<<
+dcl-proc rm_remove export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -666,11 +665,11 @@ dcl-proc rm_rmv export;
   dcl-s mapi pointer;
   dcl-s node pointer;
   dcl-s fl int(10);
-  
+
   if key = *null;
     return map;
   endif;
-  
+
   if %bitand(RMValObjFlags(map):x'40') = x'40';
     RMSysSndEscapeMsg('RM00005');
   endif;
@@ -684,26 +683,26 @@ dcl-proc rm_rmv export;
   elseif opt <> '';
     RMSysSndEscapeMsg('RM00101':%trim(opt));
   endif;
-  
+
   mapi = RMValMapImpl(map);
   node = RMBTreeGet(mapi:key:fl);
   if node <> *null;
     RMBTreeRmv(mapi:node);
   endif;
-  
+
   return map;
-  
+
   on-exit;
-  
+
   if key <> *null;
     RMMDisposeArg(key);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_RMVA <<<<<<<<<<
-dcl-proc rm_rmva export;
+// ----- RM_REMOVE_ALL <<<<<<<<<<
+dcl-proc rm_remove_all export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -713,11 +712,11 @@ dcl-proc rm_rmva export;
 
   dcl-s mapi pointer;
   dcl-s c pointer;
-  
+
   if %bitand(RMValObjFlags(map):x'40') = x'40';
     RMSysSndEscapeMsg('RM00005');
   endif;
-      
+
   mapi = RMValMapImpl(map);
   c = RMBCursorCrt(mapi:0:*null);
   if %parms = 2 and key1 = *null;
@@ -739,23 +738,23 @@ dcl-proc rm_rmva export;
     RMBTreeRmv(mapi:RMBCursorNode(c));
   enddo;
   RMBCursorDispose(c);
-  
+
   return map;
-  
+
   on-exit;
-  
+
   if %parms > 1 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 2 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-      
+
 end-proc;
 
 
-// ----- RM_CMP <<<<<<<<<<
-dcl-proc rm_cmp export;
+// ----- RM_COMPARE <<<<<<<<<<
+dcl-proc rm_compare export;
 
   dcl-pi *n int(10);
     obj1 pointer value;
@@ -763,12 +762,12 @@ dcl-proc rm_cmp export;
   end-pi;
 
   return RMValObjCompare(*null:obj1:obj2);
-    
+
 end-proc;
 
 
-// ----- RM_CEQ <<<<<<<<<<
-dcl-proc rm_ceq export;
+// ----- RM_COMPARE_EQ <<<<<<<<<<
+dcl-proc rm_compare_eq export;
 
   dcl-pi *n ind;
     obj1 pointer value;
@@ -776,12 +775,12 @@ dcl-proc rm_ceq export;
   end-pi;
 
   return RMValObjCompare(*null:obj1:obj2) = 0;
-    
+
 end-proc;
 
 
-// ----- RM_CLT <<<<<<<<<<
-dcl-proc rm_clt export;
+// ----- RM_COMPARE_LT <<<<<<<<<<
+dcl-proc rm_compare_lt export;
 
   dcl-pi *n ind;
     obj1 pointer value;
@@ -789,25 +788,25 @@ dcl-proc rm_clt export;
   end-pi;
 
   return RMValObjCompare(*null:obj1:obj2) = -1;
-    
+
 end-proc;
 
 
-// ----- RM_CLE <<<<<<<<<<
-dcl-proc rm_cle export;
+// ----- RM_COMPARE_LE <<<<<<<<<<
+dcl-proc rm_compare_le export;
 
   dcl-pi *n ind;
     obj1 pointer value;
     obj2 pointer value;
   end-pi;
-  
+
   return RMValObjCompare(*null:obj1:obj2) <> 1;
-    
+
 end-proc;
 
 
-// ----- RM_CGT <<<<<<<<<<
-dcl-proc rm_cgt export;
+// ----- RM_COMPARE_GT <<<<<<<<<<
+dcl-proc rm_compare_gt export;
 
   dcl-pi *n ind;
     obj1 pointer value;
@@ -815,20 +814,20 @@ dcl-proc rm_cgt export;
   end-pi;
 
   return RMValObjCompare(*null:obj1:obj2) = 1;
-    
+
 end-proc;
 
 
-// ----- RM_CGE <<<<<<<<<<
-dcl-proc rm_cge export;
+// ----- RM_COMPARE_GE <<<<<<<<<<
+dcl-proc rm_compare_ge export;
 
   dcl-pi *n ind;
     obj1 pointer value;
     obj2 pointer value;
   end-pi;
-  
+
   return RMValObjCompare(*null:obj1:obj2) <> -1;
-    
+
 end-proc;
 
 
@@ -846,7 +845,7 @@ dcl-proc rm_ export;
     RMValObjSSP(obj:0);
   endif;
   return obj;
-    
+
 end-proc;
 
 
@@ -862,7 +861,7 @@ dcl-proc rm_get export;
   dcl-s node pointer;
   dcl-s fl int(10);
   dcl-s item pointer;
-  
+
   if key = *null;
     return *null;
   endif;
@@ -876,21 +875,21 @@ dcl-proc rm_get export;
   elseif opt <> '';
     RMSysSndEscapeMsg('RM00101':%trim(opt));
   endif;
-  
+
   item = *null;
   node = RMBTreeGet(RMValMapImpl(map):key:fl);
   if node <> *null;
     item = RMBTreeNodeItem(node);
   endif;
-  
+
   return item;
-  
+
   on-exit;
-  
+
   if key <> *null;
     RMMDisposeArg(key);
   endif;
-  
+
 end-proc;
 
 
@@ -910,13 +909,13 @@ dcl-proc rm__ export;
   dcl-s i int(10);
 
   na = %parms-1;
-  
+
   if na > 0;
     %subarr(k:1:na) = *null;
   endif;
-  
+
 /include RPGMAPI151.RPGLE
-  
+
   mapi = RMValMapImpl(map);
   item = *null;
   for i = 1 to na;
@@ -940,17 +939,17 @@ dcl-proc rm__ export;
       endif;
     endif;
   endfor;
-    
+
   return item;
-  
+
   on-exit;
-  
+
   for i = 1 to na;
     if k(i) <> *null;
       RMMDisposeArg(k(i));
     endif;
   endfor;
-  
+
 end-proc;
 
 
@@ -967,7 +966,7 @@ dcl-proc rm__i export;
 /include RPGMAPI152.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -984,7 +983,7 @@ dcl-proc rm__p export;
 /include RPGMAPI153.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -1001,7 +1000,7 @@ dcl-proc rm__d export;
 /include RPGMAPI154.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -1018,7 +1017,7 @@ dcl-proc rm__t export;
 /include RPGMAPI155.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -1035,7 +1034,7 @@ dcl-proc rm__z export;
 /include RPGMAPI156.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -1052,7 +1051,7 @@ dcl-proc rm__n export;
 /include RPGMAPI157.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -1069,7 +1068,7 @@ dcl-proc rm__x export;
 /include RPGMAPI162.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -1086,7 +1085,7 @@ dcl-proc rm__xp export;
 /include RPGMAPI163.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -1103,7 +1102,7 @@ dcl-proc rm__a export;
 /include RPGMAPI158.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -1120,7 +1119,7 @@ dcl-proc rm__aa export;
 /include RPGMAPI160.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -1137,7 +1136,7 @@ dcl-proc rm__s export;
 /include RPGMAPI159.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
@@ -1154,34 +1153,34 @@ dcl-proc rm__sa export;
 /include RPGMAPI161.RPGLE
 
   return rm__(map:k(1):k(2):k(3):k(4):k(5):k(6):k(7):k(8):k(9):k(10));
-  
+
 end-proc;
 
 
-// ----- RM_HKY <<<<<<<<<<
-dcl-proc rm_hky export;
+// ----- RM_HAS_KEY <<<<<<<<<<
+dcl-proc rm_has_key export;
 
   dcl-pi *n ind;
     map pointer value;
     key pointer value;
   end-pi;
-  
+
   if key = *null;
     return *off;
   endif;
   return RMBTreeHasKey(RMValMapImpl(map):key) = 1;
-  
+
   on-exit;
-  
+
   if key <> *null;
     RMMDisposeArg(key);
   endif;
-  
+
 end-proc;
 
 
-// ----- RM_HKS <<<<<<<<<<
-dcl-proc rm_hks export;
+// ----- RM_HAS_KEYS <<<<<<<<<<
+dcl-proc rm_has_keys export;
 
   dcl-pi *n ind;
     map pointer value;
@@ -1190,7 +1189,7 @@ dcl-proc rm_hks export;
   end-pi;
 
   dcl-s llgt int(10);
-  
+
   if %parms < %parmnum(opt);
     llgt = 0;
   elseif %scan(OPT_GE:opt+x'40') > 0;
@@ -1200,18 +1199,18 @@ dcl-proc rm_hks export;
   elseif opt <> '';
     RMSysSndEscapeMsg('RM00101':%trim(opt));
   endif;
-  
+
   if key = *null;
     return *off;
   endif;
   return RMBTreeHasKeys(RMValMapImpl(map):key:llgt) = 1;
-  
+
   on-exit;
-  
+
   if key <> *null;
     RMMDisposeArg(key);
   endif;
-    
+
 end-proc;
 
 
@@ -1226,7 +1225,7 @@ dcl-proc rm_num export;
 
   dcl-s c pointer;
   dcl-s n uns(20);
-  
+
   if    %parms < 2
      or     key1 = *null
         and %parms > 2 and key2 = *null;
@@ -1253,23 +1252,23 @@ dcl-proc rm_num export;
     n += 1;
   enddo;
   RMBCursorDispose(c);
-    
+
   return n;
-  
+
   on-exit;
-  
+
   if %parms > 1 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 2 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_HIT <<<<<<<<<<
-dcl-proc rm_hit export;
+// ----- RM_HAS_ITEM <<<<<<<<<<
+dcl-proc rm_has_item export;
 
   dcl-pi *n ind;
     map pointer value;
@@ -1277,10 +1276,10 @@ dcl-proc rm_hit export;
     key1 pointer value options(*nopass);
     key2 pointer value options(*nopass);
   end-pi;
-  
+
   dcl-s f ind;
   dcl-s c pointer;
-  
+
   f = *off;
   c = RMBCursorCrt(RMValMapImpl(map):0:*null);
   if %parms = 3 and key1 = *null;
@@ -1306,9 +1305,9 @@ dcl-proc rm_hit export;
   enddo;
   RMBCursorDispose(c);
   return f;
-  
+
   on-exit;
-  
+
   if item <> *null;
     RMMDisposeArg(item);
   endif;
@@ -1318,12 +1317,12 @@ dcl-proc rm_hit export;
   if %parms > 3 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-  
+
 end-proc;
 
 
-// ----- RM_NIT <<<<<<<<<<
-dcl-proc rm_nit export;
+// ----- RM_NUM_ITEMS <<<<<<<<<<
+dcl-proc rm_num_items export;
 
   dcl-pi *n uns(20);
     map pointer value;
@@ -1331,10 +1330,10 @@ dcl-proc rm_nit export;
     key1 pointer value options(*nopass);
     key2 pointer value options(*nopass);
   end-pi;
-  
+
   dcl-s n uns(20);
   dcl-s c pointer;
-  
+
   n = 0;
   c = RMBCursorCrt(RMValMapImpl(map):0:*null);
   if %parms = 3 and key1 = *null;
@@ -1359,9 +1358,9 @@ dcl-proc rm_nit export;
   enddo;
   RMBCursorDispose(c);
   return n;
-  
+
   on-exit;
-  
+
   if item <> *null;
     RMMDisposeArg(item);
   endif;
@@ -1371,12 +1370,12 @@ dcl-proc rm_nit export;
   if %parms > 3 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-  
+
 end-proc;
 
 
-// ----- RM_GIK <<<<<<<<<<
-dcl-proc rm_gik export;
+// ----- RM_GET_ITEM_KEY <<<<<<<<<<
+dcl-proc rm_get_item_key export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -1385,7 +1384,7 @@ dcl-proc rm_gik export;
     key1 pointer value options(*nopass);
     key2 pointer value options(*nopass);
   end-pi;
-  
+
   dcl-s k pointer;
   dcl-s l ind;
   dcl-s c pointer;
@@ -1399,7 +1398,7 @@ dcl-proc rm_gik export;
   elseif opt <> '';
     RMSysSndEscapeMsg('RM00101':%trim(opt));
   endif;
-  
+
   k = *null;
   c = RMBCursorCrt(RMValMapImpl(map):0:*null);
   if %parms = 4 and key1 = *null;
@@ -1443,9 +1442,9 @@ dcl-proc rm_gik export;
   enddo;
   RMBCursorDispose(c);
   return k;
-  
+
   on-exit;
-  
+
   if item <> *null;
     RMMDisposeArg(item);
   endif;
@@ -1455,12 +1454,12 @@ dcl-proc rm_gik export;
   if %parms > 3 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-  
+
 end-proc;
 
 
-// ----- RM_CPY <<<<<<<<<<
-dcl-proc rm_cpy export;
+// ----- RM_COPY <<<<<<<<<<
+dcl-proc rm_copy export;
 
   dcl-pi *n pointer;
     obj pointer value;
@@ -1469,11 +1468,11 @@ dcl-proc rm_cpy export;
   end-pi;
 
   dcl-s o pointer;
-    
+
   if obj = *null;
     return *null;
   endif;
-  
+
   if %parms < 2;
     o = RMValObjCopy(obj:*off);
   elseif %parms < 3;
@@ -1481,13 +1480,13 @@ dcl-proc rm_cpy export;
   else;
     o = RMValObjCopy(obj:*off:key1:key2);
   endif;
-         
+
   RMValObjSetFlags(o:%bitand(RMValObjFlags(o):x'3F'));
-  
+
   return o;
-    
+
   on-exit;
-  
+
   if %parms > 1 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
@@ -1498,8 +1497,8 @@ dcl-proc rm_cpy export;
 end-proc;
 
 
-// ----- RM_CPYD <<<<<<<<<<
-dcl-proc rm_cpyd export;
+// ----- RM_COPY_DEEP <<<<<<<<<<
+dcl-proc rm_copy_deep export;
 
   dcl-pi *n pointer;
     obj pointer value;
@@ -1508,11 +1507,11 @@ dcl-proc rm_cpyd export;
   end-pi;
 
   dcl-s o pointer;
-      
+
   if obj = *null;
     return *null;
   endif;
-  
+
   if %parms < 2;
     o = RMValObjCopy(obj:*on);
   elseif %parms < 3;
@@ -1520,13 +1519,13 @@ dcl-proc rm_cpyd export;
   else;
     o = RMValObjCopy(obj:*on:key1:key2);
   endif;
-    
+
   RMValObjSetFlags(o:%bitand(RMValObjFlags(o):x'3F'));
-  
+
   return o;
-  
+
   on-exit;
-  
+
   if %parms > 1 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
@@ -1537,8 +1536,8 @@ dcl-proc rm_cpyd export;
 end-proc;
 
 
-// ----- RM_CUR <<<<<<<<<<
-dcl-proc rm_cur export;
+// ----- RM_CURSOR <<<<<<<<<<
+dcl-proc rm_cursor export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -1558,12 +1557,12 @@ dcl-proc rm_cur export;
   endif;
 
   return RMValCursorCrt(map:pos);
-    
+
 end-proc;
 
 
-// ----- RM_SLL <<<<<<<<<<
-dcl-proc rm_sll export;
+// ----- RM_SETLL <<<<<<<<<<
+dcl-proc rm_setll export;
 
   dcl-pi *n pointer;
     cur pointer value;
@@ -1575,20 +1574,20 @@ dcl-proc rm_sll export;
   else;
     RMBCursorSetLlGt(RMValCursorImpl(cur):*null:0);
   endif;
-  
+
   return cur;
-  
+
   on-exit;
-  
+
   if %parms >= %parmnum(key) and key <> *null;
     RMMDisposeArg(key);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_SGT <<<<<<<<<<
-dcl-proc rm_sgt export;
+// ----- RM_SETGT <<<<<<<<<<
+dcl-proc rm_setgt export;
 
   dcl-pi *n pointer;
     cur pointer value;
@@ -1600,20 +1599,20 @@ dcl-proc rm_sgt export;
   else;
     RMBCursorSetLlGt(RMValCursorImpl(cur):*null:1);
   endif;
-  
+
   return cur;
-  
+
   on-exit;
-  
+
   if %parms >= %parmnum(key) and key <> *null;
     RMMDisposeArg(key);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_RDN <<<<<<<<<<
-dcl-proc rm_rdn export;
+// ----- RM_READ_NEXT <<<<<<<<<<
+dcl-proc rm_read_next export;
 
   dcl-pi *n ind;
     cur pointer value;
@@ -1633,19 +1632,19 @@ dcl-proc rm_rdn export;
   return RMBCursorReadNxtPrv2(RMValCursorImpl(cur):0:key1:key2:0) = 1;
 
   on-exit;
-  
+
   if %parms > 1 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 2 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_RDP <<<<<<<<<<
-dcl-proc rm_rdp export;
+// ----- RM_READ_PREV <<<<<<<<<<
+dcl-proc rm_read_prev export;
 
   dcl-pi *n ind;
     cur pointer value;
@@ -1665,14 +1664,14 @@ dcl-proc rm_rdp export;
   return RMBCursorReadNxtPrv2(RMValCursorImpl(cur):1:key1:key2:0) = 1;
 
   on-exit;
-  
+
   if %parms > 1 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 2 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-    
+
 end-proc;
 
 
@@ -1684,24 +1683,24 @@ dcl-proc rm_key export;
   end-pi;
 
   return RMBCursorKey(RMValCursorImpl(cur));
-    
+
 end-proc;
 
 
-// ----- RM_ITM <<<<<<<<<<
-dcl-proc rm_itm export;
+// ----- RM_ITEM <<<<<<<<<<
+dcl-proc rm_item export;
 
   dcl-pi *n pointer;
     cur pointer value;
   end-pi;
 
   return RMBCursorItem(RMValCursorImpl(cur));
-    
+
 end-proc;
 
 
-// ----- RM_SLLN <<<<<<<<<<
-dcl-proc rm_slln export;
+// ----- RM_SETLL_READ_NEXT <<<<<<<<<<
+dcl-proc rm_setll_read_next export;
 
   dcl-pi *n ind;
     cur pointer value;
@@ -1711,10 +1710,10 @@ dcl-proc rm_slln export;
   end-pi;
 
   dcl-s pg ind;
-  
+
   pg =     %parms >= 2
        and %addr(pos) <> *null;
-        
+
   if not pg or pos;
     if pg;
       pos = *off;
@@ -1725,7 +1724,7 @@ dcl-proc rm_slln export;
       RMBCursorSetLlGt(RMValCursorImpl(cur):*null:0);
     endif;
   endif;
-  
+
   if %parms = 3 and key1 = *null;
     return RMBCursorReadNxtPrv2(RMValCursorImpl(cur):0:*null:*null:1) = 1;
   elseif %parms = 3;
@@ -1738,20 +1737,20 @@ dcl-proc rm_slln export;
   return RMBCursorReadNxtPrv2(RMValCursorImpl(cur):0:key1:key2:0) = 1;
 
   on-exit;
-  
+
   if %parms > 2 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 3 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-    
+
 end-proc;
 
 
 
-// ----- RM_SGTP <<<<<<<<<<
-dcl-proc rm_sgtp export;
+// ----- RM_SETGT_READ_PREV <<<<<<<<<<
+dcl-proc rm_setgt_read_prev export;
 
   dcl-pi *n ind;
     cur pointer value;
@@ -1761,10 +1760,10 @@ dcl-proc rm_sgtp export;
   end-pi;
 
   dcl-s pg ind;
-  
+
   pg =     %parms >= 2
        and %addr(pos) <> *null;
-        
+
   if not pg or pos;
     if pg;
       pos = *off;
@@ -1775,7 +1774,7 @@ dcl-proc rm_sgtp export;
       RMBCursorSetLlGt(RMValCursorImpl(cur):*null:1);
     endif;
   endif;
-  
+
   if %parms = 3 and key1 = *null;
     return RMBCursorReadNxtPrv2(RMValCursorImpl(cur):1:*null:*null:1) = 1;
   elseif %parms = 3;
@@ -1788,19 +1787,19 @@ dcl-proc rm_sgtp export;
   return RMBCursorReadNxtPrv2(RMValCursorImpl(cur):1:key1:key2:0) = 1;
 
   on-exit;
-  
+
   if %parms > 2 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 3 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_HSN <<<<<<<<<<
-dcl-proc rm_hsn export;
+// ----- RM_HAS_NEXT <<<<<<<<<<
+dcl-proc rm_has_next export;
 
   dcl-pi *n ind;
     cur pointer value;
@@ -1820,19 +1819,19 @@ dcl-proc rm_hsn export;
   return RMBCursorHasNxtPrv2(RMValCursorImpl(cur):0:key1:key2:0) = 1;
 
   on-exit;
-  
+
   if %parms > 1 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 2 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_HSP <<<<<<<<<<
-dcl-proc rm_hsp export;
+// ----- RM_HAS_PREV <<<<<<<<<<
+dcl-proc rm_has_prev export;
 
   dcl-pi *n ind;
     cur pointer value;
@@ -1852,19 +1851,19 @@ dcl-proc rm_hsp export;
   return RMBCursorHasNxtPrv2(RMValCursorImpl(cur):1:key1:key2:0) = 1;
 
   on-exit;
-  
+
   if %parms > 1 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
   if %parms > 2 and key2 <> *null;
     RMMDisposeArg(key2);
   endif;
-    
+
 end-proc;
 
 
-// ----- RM_FED <<<<<<<<<<
-dcl-proc rm_fed export;
+// ----- RM_FOR_EACH_DO <<<<<<<<<<
+dcl-proc rm_for_each_do export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -1884,7 +1883,7 @@ dcl-proc rm_fed export;
   return RMMForEachDo(map:proc:*off:usrd:key1:key2);
 
   on-exit;
-  
+
   if %parms > 3 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
@@ -1895,8 +1894,8 @@ dcl-proc rm_fed export;
 end-proc;
 
 
-// ----- RM_FEDR <<<<<<<<<<
-dcl-proc rm_fedr export;
+// ----- RM_FOR_EACH_DO_REV <<<<<<<<<<
+dcl-proc rm_for_each_do_rev export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -1916,7 +1915,7 @@ dcl-proc rm_fedr export;
   return RMMForEachDo(map:proc:*on:usrd:key1:key2);
 
   on-exit;
-  
+
   if %parms > 3 and key1 <> *null;
     RMMDisposeArg(key1);
   endif;
@@ -1927,8 +1926,8 @@ dcl-proc rm_fedr export;
 end-proc;
 
 
-// ----- RM_SCF <<<<<<<<<<
-dcl-proc rm_scf export;
+// ----- RM_SET_COMP_FUN <<<<<<<<<<
+dcl-proc rm_set_comp_fun export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -1938,28 +1937,28 @@ dcl-proc rm_scf export;
   if RMBTreeNum(RMValMapImpl(map)) > 0;
     RMSysSndEscapeMsg('RM00041');
   endif;
-  
+
   RMValMapSetCompf(map:comp);
 
   return map;
-      
+
 end-proc;
 
 
-// ----- RM_GCF <<<<<<<<<<
-dcl-proc rm_gcf export;
+// ----- RM_GET_COMP_FUN <<<<<<<<<<
+dcl-proc rm_get_comp_fun export;
 
   dcl-pi *n pointer(*proc);
     map pointer value;
   end-pi;
 
   return RMValMapGetCompf(map);
-      
+
 end-proc;
 
 
-// ----- RM_SAV <<<<<<<<<<
-dcl-proc rm_sav export;
+// ----- RM_SET_ATTR_VAL <<<<<<<<<<
+dcl-proc rm_set_attr_val export;
 
   dcl-pi *n pointer;
     map pointer value;
@@ -1977,9 +1976,9 @@ dcl-proc rm_sav export;
     %subarr(a:1:na) = '';
     %subarr(v:1:na) = '';
   endif;
-    
+
 /include RPGMAPI164.RPGLE
-  
+
   if na = 0;
     RMValMapSetAttr(map);
   else;
@@ -1991,14 +1990,14 @@ dcl-proc rm_sav export;
       endif;
     endfor;
   endif;
-  
+
   return map;
-      
+
 end-proc;
 
 
-// ----- RM_GAV <<<<<<<<<<
-dcl-proc rm_gav export;
+// ----- RM_GET_ATTR_VAL <<<<<<<<<<
+dcl-proc rm_get_attr_val export;
 
   dcl-pi *n varchar(100) ccsid(*utf8);
     map pointer value;
@@ -2006,19 +2005,19 @@ dcl-proc rm_gav export;
   end-pi;
 
   return RMValMapGetAttr(map:attr);
-      
+
 end-proc;
 
 
-// ----- RM_USRD <<<<<<<<<<
-dcl-proc rm_usrd export;
+// ----- RM_USER_DATA <<<<<<<<<<
+dcl-proc rm_user_data export;
 
   dcl-pi *n int(10);
     obj pointer value;
   end-pi;
 
   return RMValRtnUsrDta(obj);
-      
+
 end-proc;
 
 
@@ -2034,11 +2033,11 @@ dcl-proc rm_i export;
     return RMValIntCrt(value:10:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValIntCrt(value:10:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValIntCrt(value:10);
-    
+
 end-proc;
 
 
@@ -2054,11 +2053,11 @@ dcl-proc rm_i1 export;
     return RMValIntCrt(value:10:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValIntCrt(value:10:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValIntCrt(value:10);
-    
+
 end-proc;
 
 
@@ -2074,47 +2073,47 @@ dcl-proc rm_i2 export;
     return RMValIntCrt(value:20:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValIntCrt(value:20:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValIntCrt(value:20);
-    
+
 end-proc;
 
 
-// ----- RM_ISI <<<<<<<<<<
-dcl-proc rm_isi export;
+// ----- RM_IS_I <<<<<<<<<<
+dcl-proc rm_is_i export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsInt(obj);
-    
+
 end-proc;
 
 
-// ----- RM_ISI1 <<<<<<<<<<
-dcl-proc rm_isi1 export;
+// ----- RM_IS_I1 <<<<<<<<<<
+dcl-proc rm_is_i1 export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsInt(obj:10);
-    
+
 end-proc;
 
 
-// ----- RM_ISI2 <<<<<<<<<<
-dcl-proc rm_isi2 export;
+// ----- RM_IS_I2 <<<<<<<<<<
+dcl-proc rm_is_i2 export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsInt(obj:20);
-    
+
 end-proc;
 
 
@@ -2130,7 +2129,7 @@ dcl-proc rm_i_ export;
     return RMValConv2Int(value:default);
   endif;
   return RMValConv2Int(value);
-    
+
 end-proc;
 
 
@@ -2143,7 +2142,7 @@ dcl-proc rm_i__ export;
   end-pi;
 
   dcl-s r int(10);
-  
+
   if %parms > 1;
     r = RMValConv2Int(value:default);
   else;
@@ -2151,7 +2150,7 @@ dcl-proc rm_i__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2167,7 +2166,7 @@ dcl-proc rm_i1_ export;
     return RMValConv2Int(value:default);
   endif;
   return RMValConv2Int(value);
-    
+
 end-proc;
 
 
@@ -2180,7 +2179,7 @@ dcl-proc rm_i1__ export;
   end-pi;
 
   dcl-s r int(10);
-  
+
   if %parms > 1;
     r = RMValConv2Int(value:default);
   else;
@@ -2188,7 +2187,7 @@ dcl-proc rm_i1__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2204,7 +2203,7 @@ dcl-proc rm_i2_ export;
     return RMValConv2Int(value:default);
   endif;
   return RMValConv2Int(value);
-    
+
 end-proc;
 
 
@@ -2217,7 +2216,7 @@ dcl-proc rm_i2__ export;
   end-pi;
 
   dcl-s r int(20);
-  
+
   if %parms > 1;
     r = RMValConv2Int(value:default);
   else;
@@ -2225,7 +2224,7 @@ dcl-proc rm_i2__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2241,11 +2240,11 @@ dcl-proc rm_p export;
     return RMValPDecCrt(value:10:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValPDecCrt(value:10:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValPDecCrt(value:10);
-    
+
 end-proc;
 
 
@@ -2261,11 +2260,11 @@ dcl-proc rm_p1 export;
     return RMValPDecCrt(value:10:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValPDecCrt(value:10:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValPDecCrt(value:10);
-    
+
 end-proc;
 
 
@@ -2281,11 +2280,11 @@ dcl-proc rm_p2 export;
     return RMValPDecCrt(value:20:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValPDecCrt(value:20:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValPDecCrt(value:20);
-    
+
 end-proc;
 
 
@@ -2301,59 +2300,59 @@ dcl-proc rm_p3 export;
     return RMValPDecCrt(value:30:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValPDecCrt(value:30:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValPDecCrt(value:30);
-    
+
 end-proc;
 
 
-// ----- RM_ISP <<<<<<<<<<
-dcl-proc rm_isp export;
+// ----- RM_IS_P <<<<<<<<<<
+dcl-proc rm_is_p export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsPDec(obj);
-    
+
 end-proc;
 
 
-// ----- RM_ISP1 <<<<<<<<<<
-dcl-proc rm_isp1 export;
+// ----- RM_IS_P1 <<<<<<<<<<
+dcl-proc rm_is_p1 export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsPDec(obj:10);
-    
+
 end-proc;
 
 
-// ----- RM_ISP2 <<<<<<<<<<
-dcl-proc rm_isp2 export;
+// ----- RM_IS_P2 <<<<<<<<<<
+dcl-proc rm_is_p2 export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsPDec(obj:20);
-    
+
 end-proc;
 
 
-// ----- RM_ISP3 <<<<<<<<<<
-dcl-proc rm_isp3 export;
+// ----- RM_IS_P3 <<<<<<<<<<
+dcl-proc rm_is_p3 export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsPDec(obj:30);
-    
+
 end-proc;
 
 
@@ -2369,7 +2368,7 @@ dcl-proc rm_p_ export;
     return RMValConv2PDec(value:default);
   endif;
   return RMValConv2PDec(value);
-    
+
 end-proc;
 
 
@@ -2382,7 +2381,7 @@ dcl-proc rm_p__ export;
   end-pi;
 
   dcl-s r packed(14:4);
-  
+
   if %parms > 1;
     r = RMValConv2PDec(value:default);
   else;
@@ -2390,7 +2389,7 @@ dcl-proc rm_p__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2406,7 +2405,7 @@ dcl-proc rm_p1_ export;
     return RMValConv2PDec(value:default);
   endif;
   return RMValConv2PDec(value);
-    
+
 end-proc;
 
 
@@ -2419,7 +2418,7 @@ dcl-proc rm_p1__ export;
   end-pi;
 
   dcl-s r packed(14:4);
-  
+
   if %parms > 1;
     r = RMValConv2PDec(value:default);
   else;
@@ -2427,7 +2426,7 @@ dcl-proc rm_p1__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2443,7 +2442,7 @@ dcl-proc rm_p2_ export;
     return RMValConv2PDec(value:default);
   endif;
   return RMValConv2PDec(value);
-    
+
 end-proc;
 
 
@@ -2456,7 +2455,7 @@ dcl-proc rm_p2__ export;
   end-pi;
 
   dcl-s r packed(28:8);
-  
+
   if %parms > 1;
     r = RMValConv2PDec(value:default);
   else;
@@ -2464,7 +2463,7 @@ dcl-proc rm_p2__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2480,7 +2479,7 @@ dcl-proc rm_p3_ export;
     return RMValConv2PDec(value:default);
   endif;
   return RMValConv2PDec(value);
-    
+
 end-proc;
 
 
@@ -2493,7 +2492,7 @@ dcl-proc rm_p3__ export;
   end-pi;
 
   dcl-s r packed(46:16);
-  
+
   if %parms > 1;
     r = RMValConv2PDec(value:default);
   else;
@@ -2501,7 +2500,7 @@ dcl-proc rm_p3__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2517,11 +2516,11 @@ dcl-proc rm_d export;
     return RMValDateCrt(value:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValDateCrt(value:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValDateCrt(value);
-    
+
 end-proc;
 
 
@@ -2537,11 +2536,11 @@ dcl-proc rm_t export;
     return RMValTimeCrt(value:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValTimeCrt(value:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValTimeCrt(value);
-    
+
 end-proc;
 
 
@@ -2557,47 +2556,47 @@ dcl-proc rm_z export;
     return RMValTsCrt(value:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValTsCrt(value:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValTsCrt(value);
-    
+
 end-proc;
 
 
-// ----- RM_ISD <<<<<<<<<<
-dcl-proc rm_isd export;
+// ----- RM_IS_D <<<<<<<<<<
+dcl-proc rm_is_d export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsDate(obj);
-    
+
 end-proc;
 
 
-// ----- RM_IST <<<<<<<<<<
-dcl-proc rm_ist export;
+// ----- RM_IS_T <<<<<<<<<<
+dcl-proc rm_is_t export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsTime(obj);
-    
+
 end-proc;
 
 
-// ----- RM_ISZ <<<<<<<<<<
-dcl-proc rm_isz export;
+// ----- RM_IS_Z <<<<<<<<<<
+dcl-proc rm_is_z export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsTs(obj);
-    
+
 end-proc;
 
 
@@ -2613,7 +2612,7 @@ dcl-proc rm_d_ export;
     return RMValConv2Date(value:default);
   endif;
   return RMValConv2Date(value);
-    
+
 end-proc;
 
 
@@ -2626,7 +2625,7 @@ dcl-proc rm_d__ export;
   end-pi;
 
   dcl-s r date;
-  
+
   if %parms > 1;
     r = RMValConv2Date(value:default);
   else;
@@ -2634,7 +2633,7 @@ dcl-proc rm_d__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2650,7 +2649,7 @@ dcl-proc rm_t_ export;
     return RMValConv2Time(value:default);
   endif;
   return RMValConv2Time(value);
-    
+
 end-proc;
 
 
@@ -2663,7 +2662,7 @@ dcl-proc rm_t__ export;
   end-pi;
 
   dcl-s r time;
-  
+
   if %parms > 1;
     r = RMValConv2Time(value:default);
   else;
@@ -2671,7 +2670,7 @@ dcl-proc rm_t__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2687,7 +2686,7 @@ dcl-proc rm_z_ export;
     return RMValConv2Ts(value:default);
   endif;
   return RMValConv2Ts(value);
-    
+
 end-proc;
 
 
@@ -2700,7 +2699,7 @@ dcl-proc rm_z__ export;
   end-pi;
 
   dcl-s r timestamp;
-  
+
   if %parms > 1;
     r = RMValConv2Ts(value:default);
   else;
@@ -2708,7 +2707,7 @@ dcl-proc rm_z__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2724,23 +2723,23 @@ dcl-proc rm_n export;
     return RMValIndCrt(value:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValIndCrt(value:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValIndCrt(value);
-    
+
 end-proc;
 
 
-// ----- RM_ISN <<<<<<<<<<
-dcl-proc rm_isn export;
+// ----- RM_IS_N <<<<<<<<<<
+dcl-proc rm_is_n export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsInd(obj);
-    
+
 end-proc;
 
 
@@ -2756,7 +2755,7 @@ dcl-proc rm_n_ export;
     return RMValConv2Ind(value:default);
   endif;
   return RMValConv2Ind(value);
-    
+
 end-proc;
 
 
@@ -2769,7 +2768,7 @@ dcl-proc rm_n__ export;
   end-pi;
 
   dcl-s r ind;
-  
+
   if %parms > 1;
     r = RMValConv2Ind(value:default);
   else;
@@ -2777,7 +2776,7 @@ dcl-proc rm_n__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2793,22 +2792,22 @@ dcl-proc rm_x export;
     return RMValPtrCrt(value:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValPtrCrt(value:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValPtrCrt(value);
-    
+
 end-proc;
 
 
-// ----- RM_ISX <<<<<<<<<<
-dcl-proc rm_isx export;
+// ----- RM_IS_X <<<<<<<<<<
+dcl-proc rm_is_x export;
 dcl-pi *n ind;
   obj pointer value;
 end-pi;
 
   return RMValIsPtr(obj);
-    
+
 end-proc;
 
 
@@ -2824,7 +2823,7 @@ dcl-proc rm_x_ export;
     return RMValConv2Ptr(value:default);
   endif;
   return RMValConv2Ptr(value);
-    
+
 end-proc;
 
 
@@ -2837,7 +2836,7 @@ dcl-proc rm_x__ export;
   end-pi;
 
   dcl-s r pointer;
-  
+
   if %parms > 1;
     r = RMValConv2Ptr(value:default);
   else;
@@ -2845,7 +2844,7 @@ dcl-proc rm_x__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2861,23 +2860,23 @@ dcl-proc rm_xp export;
     return RMValPPtrCrt(value:x'10');
   elseif %parms > 1 and opt < 0 and opt >= -65000;
     return RMValPPtrCrt(value:x'00':0-opt);
-  elseif %parms > 1;    
+  elseif %parms > 1;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValPPtrCrt(value);
-    
+
 end-proc;
 
 
-// ----- RM_ISXP <<<<<<<<<<
-dcl-proc rm_isxp export;
+// ----- RM_IS_XP <<<<<<<<<<
+dcl-proc rm_is_xp export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsPPtr(obj);
-    
+
 end-proc;
 
 
@@ -2893,7 +2892,7 @@ dcl-proc rm_xP_ export;
     return RMValConv2PPtr(value:default);
   endif;
   return RMValConv2PPtr(value);
-    
+
 end-proc;
 
 
@@ -2906,7 +2905,7 @@ dcl-proc rm_xp__ export;
   end-pi;
 
   dcl-s r pointer(*proc);
-  
+
   if %parms > 1;
     r = RMValConv2PPtr(value:default);
   else;
@@ -2914,7 +2913,7 @@ dcl-proc rm_xp__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -2940,7 +2939,7 @@ dcl-proc rm_a export;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValCharCrt(value);
-    
+
 end-proc;
 
 
@@ -2967,7 +2966,7 @@ dcl-proc rm_ap export;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValCharCrtPtr(addr:size);
-    
+
 end-proc;
 
 
@@ -2987,7 +2986,7 @@ dcl-proc rm_aa export;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValCharCrt(value:x'20');
-    
+
 end-proc;
 
 
@@ -3008,31 +3007,31 @@ dcl-proc rm_aap export;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValCharCrtPtr(addr:size:x'20');
-    
+
 end-proc;
 
 
-// ----- RM_ISA <<<<<<<<<<
-dcl-proc rm_isa export;
+// ----- RM_IS_A <<<<<<<<<<
+dcl-proc rm_is_a export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsChar(obj);
-    
+
 end-proc;
 
 
-// ----- RM_ISAA <<<<<<<<<<
-dcl-proc rm_isaa export;
+// ----- RM_IS_AA <<<<<<<<<<
+dcl-proc rm_is_aa export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsChar(obj:*on);
-    
+
 end-proc;
 
 
@@ -3048,7 +3047,7 @@ dcl-proc rm_a_ export;
     return RMValConv2Char(value:default);
   endif;
   return RMValConv2Char(value);
-    
+
 end-proc;
 
 
@@ -3061,7 +3060,7 @@ dcl-proc rm_a__ export;
   end-pi;
 
   dcl-s r varchar(30000);
-  
+
   if %parms > 2;
     r = RMValConv2Char(value:default);
   else;
@@ -3069,7 +3068,7 @@ dcl-proc rm_a__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -3085,7 +3084,7 @@ dcl-proc rm_a1_ export;
     return RMValConv2Char1(value:default);
   endif;
   return RMValConv2Char1(value);
-    
+
 end-proc;
 
 
@@ -3098,7 +3097,7 @@ dcl-proc rm_a1__ export;
   end-pi;
 
   dcl-s r varchar(100);
-  
+
   if %parms > 2;
     r = RMValConv2Char1(value:default);
   else;
@@ -3106,7 +3105,7 @@ dcl-proc rm_a1__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -3122,7 +3121,7 @@ dcl-proc rm_a2_ export;
     return RMValConv2Char2(value:default);
   endif;
   return RMValConv2Char2(value);
-    
+
 end-proc;
 
 
@@ -3135,7 +3134,7 @@ dcl-proc rm_a2__ export;
   end-pi;
 
   dcl-s r varchar(1000);
-  
+
   if %parms > 2;
     r = RMValConv2Char2(value:default);
   else;
@@ -3143,7 +3142,7 @@ dcl-proc rm_a2__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -3159,7 +3158,7 @@ dcl-proc rm_a3_ export;
     return RMValConv2Char3(value:default);
   endif;
   return RMValConv2Char3(value);
-    
+
 end-proc;
 
 
@@ -3172,7 +3171,7 @@ dcl-proc rm_a3__ export;
   end-pi;
 
   dcl-s r varchar(10000);
-  
+
   if %parms > 2;
     r = RMValConv2Char3(value:default);
   else;
@@ -3180,7 +3179,7 @@ dcl-proc rm_a3__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -3206,7 +3205,7 @@ dcl-proc rm_s export;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValStrCrt(value);
-    
+
 end-proc;
 
 
@@ -3232,7 +3231,7 @@ dcl-proc rm_sb export;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValStrCrtBytes(value);
-    
+
 end-proc;
 
 
@@ -3252,7 +3251,7 @@ dcl-proc rm_sa export;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValStrCrt(value:x'20');
-    
+
 end-proc;
 
 
@@ -3272,31 +3271,31 @@ dcl-proc rm_sab export;
     RMSysSndEscapeMsg('RM00111':%char(opt));
   endif;
   return RMValStrCrtBytes(value:x'20');
-    
+
 end-proc;
 
 
-// ----- RM_ISS <<<<<<<<<<
-dcl-proc rm_iss export;
+// ----- RM_IS_S <<<<<<<<<<
+dcl-proc rm_is_s export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsStr(obj);
-    
+
 end-proc;
 
 
-// ----- RM_ISSA <<<<<<<<<<
-dcl-proc rm_issa export;
+// ----- RM_IS_SA <<<<<<<<<<
+dcl-proc rm_is_sa export;
 
   dcl-pi *n ind;
     obj pointer value;
   end-pi;
 
   return RMValIsStr(obj:*on);
-    
+
 end-proc;
 
 
@@ -3312,7 +3311,7 @@ dcl-proc rm_s_ export;
     return RMValConv2Str(value:default);
   endif;
   return RMValConv2Str(value);
-    
+
 end-proc;
 
 
@@ -3325,7 +3324,7 @@ dcl-proc rm_s__ export;
   end-pi;
 
   dcl-s r varchar(30000) ccsid(*utf8);
-  
+
   if %parms > 2;
     r = RMValConv2Str(value:default);
   else;
@@ -3333,7 +3332,7 @@ dcl-proc rm_s__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -3349,7 +3348,7 @@ dcl-proc rm_s1_ export;
     return RMValConv2Str1(value:default);
   endif;
   return RMValConv2Str1(value);
-    
+
 end-proc;
 
 
@@ -3362,7 +3361,7 @@ dcl-proc rm_s1__ export;
   end-pi;
 
   dcl-s r varchar(100) ccsid(*utf8);
-  
+
   if %parms > 2;
     r = RMValConv2Str1(value:default);
   else;
@@ -3370,7 +3369,7 @@ dcl-proc rm_s1__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -3386,7 +3385,7 @@ dcl-proc rm_s2_ export;
     return RMValConv2Str2(value:default);
   endif;
   return RMValConv2Str2(value);
-    
+
 end-proc;
 
 
@@ -3399,7 +3398,7 @@ dcl-proc rm_s2__ export;
   end-pi;
 
   dcl-s r varchar(1000) ccsid(*utf8);
-  
+
   if %parms > 2;
     r = RMValConv2Str2(value:default);
   else;
@@ -3407,7 +3406,7 @@ dcl-proc rm_s2__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -3423,7 +3422,7 @@ dcl-proc rm_s3_ export;
     return RMValConv2Str3(value:default);
   endif;
   return RMValConv2Str3(value);
-    
+
 end-proc;
 
 
@@ -3436,7 +3435,7 @@ dcl-proc rm_s3__ export;
   end-pi;
 
   dcl-s r varchar(10000) ccsid(*utf8);
-  
+
   if %parms > 2;
     r = RMValConv2Str3(value:default);
   else;
@@ -3444,7 +3443,7 @@ dcl-proc rm_s3__ export;
   endif;
   RMValDispose2(value);
   return r;
-    
+
 end-proc;
 
 
@@ -3463,7 +3462,7 @@ dcl-proc rm_add_event_handler export;
     RMBAddEventh(RMValMapImpl(map):hproc:*null);
   endif;
   return map;
-    
+
 end-proc;
 
 
@@ -3477,8 +3476,259 @@ dcl-proc rm_remove_event_handler export;
 
   RMBRmvEventh(RMValMapImpl(map):hproc);
   return map;
-    
+
 end-proc;
 
 
 // ----- Internal procedures
+
+
+// Return *on if the k/i pair has been inserted.
+dcl-proc RMMInsert;
+
+  dcl-pi *n ind;
+    map pointer value;
+    mode int(10) value;
+    k pointer value;
+    i pointer value;
+  end-pi;
+
+  dcl-s obj pointer;
+  dcl-s mapi pointer;
+  dcl-s c pointer;
+  dcl-s isv ind;
+  dcl-s flags char(1);
+
+  if %bitand(RMValObjFlags(map):x'02') = x'02' and not rm_is_i(k);
+    RMSysSndEscapeMsg('RM00002');
+  endif;
+  if %bitand(RMValObjFlags(map):x'40') = x'40';
+    RMSysSndEscapeMsg('RM00005');
+  endif;
+  obj = k;
+  exsr checkobj;
+  if i <> *null;
+    obj = i;
+    exsr checkobj;
+  endif;
+  mapi = RMValMapImpl(map);
+  if mode = 1; //excl
+    c = RMBCursorCrt(mapi:0:*null);
+    RMBCursorSetLlGt(c:k:0);
+    dow     RMBCursorReadNxtPrv(c:0) = 1
+        and RMValObjCompare(map:k:RMBCursorKey(c)) = 0;
+      RMBTreeRmv(mapi:RMBCursorNode(c));
+    enddo;
+    RMBCursorDispose(c);
+  endif;
+  if     mode = 2 //cond
+     and RMBTreeHasKey(mapi:k) = 1;
+    return *off;
+  endif;
+  RMBTreeInsert(mapi:k:i);
+  flags = RMValObjFlags(k);
+  if %bitand(flags:x'01') <> x'01';
+    RMValObjSetFlags(k:%bitor(flags:x'80'));
+  endif;
+  if i <> *null;
+    flags = RMValObjFlags(i);
+    if %bitand(flags:x'01') <> x'01';
+      RMValObjSetFlags(i:%bitor(flags:x'80'));
+    endif;
+  endif;
+
+  RMBFireEvent(mapi:1:k:i);
+
+  return *on;
+
+  begsr checkobj;
+    if RMValIsCursor(obj);
+      RMSysSndEscapeMsg('RM00201');
+    endif;
+    if %bitand(RMValObjFlags(obj):x'80') = x'80';
+      if RMValIsMap(obj);
+        RMSysSndEscapeMsg('RM00010');
+      else;
+        RMSysSndEscapeMsg('RM00012');
+      endif;
+    endif;
+  endsr;
+
+end-proc;
+
+
+dcl-proc RMMInsertFromMap;
+
+  dcl-pi *n;
+    map pointer value;
+    mode int(10) value;
+    map2 pointer value;
+    key1 pointer value options(*nopass);
+    key2 pointer value options(*nopass);
+  end-pi;
+
+  dcl-s c pointer;
+  dcl-s k pointer;
+  dcl-s i pointer;
+  dcl-s dk ind inz(*off);
+  dcl-s di ind inz(*off);
+
+  c = RMBCursorCrt(RMValMapImpl(map2):0:*null);
+  if %parms = 4 and key1 = *null;
+    RMBCursorSetLlGt(c:*null:1);
+  elseif     %parms > 3
+         and key1 <> *null;
+    RMBCursorSetLlGt(c:key1:0);
+  endif;
+  dow RMBCursorReadNxtPrv(c:0) = 1;
+    if %parms > 4;
+      if     key2 <> *null
+         and RMValObjCompare(map2:RMBCursorKey(c):key2) = 1;
+        leave;
+      endif;
+    elseif     %parms = 4
+           and RMValObjCompare(map2:RMBCursorKey(c):key1) = 1;
+      leave;
+    endif;
+    k = RMBCursorKey(c);
+    i = RMBCursorItem(c);
+    dk = *off;
+    di = *off;
+    if     k <> *null
+       and (not RMValIsMap(k) or %bitand(RMValObjFlags(k):x'01') <> x'01');
+      k = rm_copy(k);
+      dk = *on;
+    endif;
+    if     i <> *null
+       and (not RMValIsMap(i) or %bitand(RMValObjFlags(i):x'01') <> x'01');
+      i = rm_copy(i);
+      di = *on;
+    endif;
+    if     k <> *null
+       and RMMInsert(map:mode:k:i);
+      dk = *off;
+      di = *off;
+    endif;
+    if dk;
+      dk = *off;
+      RMValDispose(k);
+    endif;
+    if di;
+      di = *off;
+      RMValDispose(i);
+    endif;
+  enddo;
+  RMBCursorDispose(c);
+
+  return;
+
+  on-exit;
+
+  if dk;
+    dk = *off;
+    RMValDispose(k);
+  endif;
+  if di;
+    di = *off;
+    RMValDispose(i);
+  endif;
+
+end-proc;
+
+
+dcl-proc RMMForEachDo;
+
+  dcl-pi *n pointer;
+    map pointer value;
+    proc pointer(*proc) value;
+    rev ind value;
+    usrd pointer value options(*nopass);
+    key1 pointer value options(*nopass);
+    key2 pointer value options(*nopass);
+  end-pi;
+
+  dcl-pr call_proc pointer extproc(call_proc_p);
+    key pointer value;
+    item pointer value;
+    usrd pointer value;
+    stop ind;
+  end-pr;
+
+  dcl-s call_proc_p pointer(*proc);
+  dcl-s usrd2 pointer;
+  dcl-s stop ind;
+  dcl-s c pointer;
+
+  if %parms >= %parmnum(usrd);
+    usrd2 = usrd;
+  else;
+    usrd2 = *null;
+  endif;
+
+  stop = *off;
+  call_proc_p = proc;
+  c = RMBCursorCrt(RMValMapImpl(map):0:*null);
+  if %parms = 5 and key1 = *null;
+    if not rev;
+      RMBCursorSetLlGt(c:*null:1);
+    endif;
+  elseif rev;
+    if %parms = 5;
+      RMBCursorSetLlGt(c:key1:1);
+    elseif    %parms < 6
+           or key2 = *null;
+      RMBCursorSetLlGt(c:*null:1);
+    else;
+      RMBCursorSetLlGt(c:key2:1);
+    endif;
+  elseif     %parms > 4
+         and key1 <> *null;
+    RMBCursorSetLlGt(c:key1:0);
+  endif;
+  dow        rev and RMBCursorReadNxtPrv(c:1) = 1
+      or not rev and RMBCursorReadNxtPrv(c:0) = 1;
+    if rev;
+      if     %parms > 4
+         and key1 <> *null
+         and RMValObjCompare(map:RMBCursorKey(c):key1) = -1;
+        leave;
+      endif;
+    elseif %parms > 5;
+      if     key2 <> *null
+         and RMValObjCompare(map:RMBCursorKey(c):key2) = 1;
+        leave;
+      endif;
+    elseif     %parms = 5
+           and RMValObjCompare(map:RMBCursorKey(c):key1) = 1;
+      leave;
+    endif;
+    usrd2 = call_proc(RMBCursorKey(c):RMBCursorItem(c):usrd2:stop);
+    if stop;
+      leave;
+    endif;
+  enddo;
+  RMBCursorDispose(c);
+
+  return usrd2;
+
+end-proc;
+
+
+// Dispose obj, which has been used as an argument.
+// Do not dispose if obj is *null, a cursor, a manually disposed map,
+// or a value/map contained in a map.
+dcl-proc RMMDisposeArg;
+
+  dcl-pi *n;
+    obj pointer value;
+  end-pi;
+
+  if    obj = *null
+     or RMValIsCursor(obj)
+     or %bitand(RMValObjFlags(obj):x'01') = x'01'
+     or %bitand(RMValObjFlags(obj):x'80') = x'80';
+    return;
+  endif;
+  RMValDispose(obj);
+
+end-proc;
